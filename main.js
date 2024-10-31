@@ -359,7 +359,7 @@ class UIScene extends Phaser.Scene {
         }).setOrigin(0.5).setDepth(1).setVisible(false);
 
         // ボタンの初期化
-        this.retryButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 60, 'もういちど', {
+        this.retryButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 60, 'もういっかいはこぶ！', {
             fontSize: '22px',
             fill: '#00ff00',
             backgroundColor: '#000000',
@@ -367,7 +367,7 @@ class UIScene extends Phaser.Scene {
             align: 'center'
         }).setOrigin(0.5).setDepth(1).setInteractive().setVisible(false);
 
-        this.nextStageButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 110, 'つぎのすてーじへ', {
+        this.menuButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 110, 'さいしょにもどる', {
             fontSize: '22px',
             fill: '#00ff00',
             backgroundColor: '#000000',
@@ -375,10 +375,25 @@ class UIScene extends Phaser.Scene {
             align: 'center'
         }).setOrigin(0.5).setDepth(1).setInteractive().setVisible(false);
 
+        this.nextStageButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 160, 'つぎのすてーじへ', {
+            fontSize: '22px',
+            fill: '#00ff00',
+            backgroundColor: '#000000',
+            padding: { x: 10, y: 5 },
+            align: 'center'
+        }).setOrigin(0.5).setDepth(1).setInteractive().setVisible(false);
+
+        // ボタンのイベント設定
         this.retryButton.on('pointerdown', () => {
             this.hideMessages();
             this.scene.stop('MainScene');
             this.scene.start('MainScene', { stageNumber: this.registry.get('currentStage') });
+        });
+
+        this.menuButton.on('pointerdown', () => {
+            this.hideMessages();
+            this.scene.stop('MainScene');
+            this.scene.start('MenuScene');
         });
 
         this.nextStageButton.on('pointerdown', () => {
@@ -408,6 +423,7 @@ class UIScene extends Phaser.Scene {
         const message = getRandomMessage('fail');
         this.messageText.setText(message).setVisible(true);
         this.retryButton.setVisible(true);
+        this.menuButton.setVisible(true);
     }
 
     showIntermediateMessage(stageNumber) {
@@ -426,6 +442,7 @@ class UIScene extends Phaser.Scene {
     hideMessages() {
         this.messageText.setVisible(false);
         this.retryButton.setVisible(false);
+        this.menuButton.setVisible(false);
         this.nextStageButton.setVisible(false);
     }
 
@@ -468,6 +485,9 @@ class BootScene extends Phaser.Scene {
         // ステージ設定をグローバルに保存
         this.registry.set('stages', stagesConfig);
 
+        // UISceneを開始
+        this.scene.launch('UIScene');
+
         // メニューシーンへ遷移
         this.scene.start('MenuScene');
     }
@@ -487,7 +507,8 @@ class MenuScene extends Phaser.Scene {
         // タイトルテキスト
         this.add.text(this.cameras.main.centerX, 200, 'おとどけサンタ', {
             fontSize: '48px',
-            fill: '#ffffff'
+            fill: '#ffffff',
+            align: 'center'
         }).setOrigin(0.5);
 
         // スタートボタン
