@@ -1,6 +1,6 @@
 // main.js
 
-// ステージ設定を直接定義
+// ステージ設定を直接定義（ステージ1から15まで）
 const stagesConfig = {
   "stages": [
     {
@@ -12,154 +12,191 @@ const stagesConfig = {
     {
       "stageNumber": 2,
       "iceBlocks": [
-        { "direction": "left", "speed": 100 },
-        { "direction": "right", "speed": 100 }
+        { "direction": "left", "speed": 120 },
+        { "direction": "right", "speed": 120 }
       ]
     },
     {
       "stageNumber": 3,
       "iceBlocks": [
-        { "direction": "left", "speed": 150 },
-        { "direction": "right", "speed": 100 }
+        { "direction": "left", "speed": 140 },
+        { "direction": "right", "speed": 140 },
+        { "direction": "up", "speed": 100 }
       ]
     },
     {
       "stageNumber": 4,
       "iceBlocks": [
-        { "direction": "left", "speed": 150 },
-        { "direction": "right", "speed": 100 },
-        { "direction": "up", "speed": 80 }
+        { "direction": "left", "speed": 160 },
+        { "direction": "right", "speed": 160 },
+        { "direction": "up", "speed": 120 },
+        { "direction": "down", "speed": 120 }
       ]
     },
     {
       "stageNumber": 5,
       "iceBlocks": [
-        { "direction": "left", "speed": 150 },
-        { "direction": "right", "speed": 100 },
-        { "direction": "up", "speed": 80 },
+        { "direction": "left", "speed": 180 },
+        { "direction": "right", "speed": 180 },
+        { "direction": "up", "speed": 140 },
+        { "direction": "down", "speed": 140 },
         { "direction": "left", "speed": 200 }
       ]
     },
     {
       "stageNumber": 6,
       "iceBlocks": [
-        { "direction": "left", "speed": 200 },
-        { "direction": "right", "speed": 150 },
-        { "direction": "up", "speed": 100 },
-        { "direction": "right", "speed": 200 }
+        { "direction": "left", "speed": 220 },
+        { "direction": "right", "speed": 220 },
+        { "direction": "up", "speed": 160 },
+        { "direction": "down", "speed": 160 },
+        { "direction": "left", "speed": 240 },
+        { "direction": "right", "speed": 240 }
       ]
     },
     {
       "stageNumber": 7,
       "iceBlocks": [
-        { "direction": "left", "speed": 200 },
-        { "direction": "right", "speed": 150 },
-        { "direction": "up", "speed": 100 },
-        { "direction": "right", "speed": 200 },
-        { "direction": "left", "speed": 250 }
+        { "direction": "left", "speed": 260 },
+        { "direction": "right", "speed": 260 },
+        { "direction": "up", "speed": 180 },
+        { "direction": "down", "speed": 180 },
+        { "direction": "left", "speed": 280 },
+        { "direction": "right", "speed": 280 },
+        { "direction": "up", "speed": 200 }
       ]
     },
     {
       "stageNumber": 8,
       "iceBlocks": [
-        { "direction": "left", "speed": 250 },
-        { "direction": "right", "speed": 200 },
-        { "direction": "up", "speed": 150 },
-        { "direction": "right", "speed": 250 },
-        { "direction": "up", "speed": 120 }
+        { "direction": "left", "speed": 300 },
+        { "direction": "right", "speed": 300 },
+        { "direction": "up", "speed": 220 },
+        { "direction": "down", "speed": 220 },
+        { "direction": "left", "speed": 320 },
+        { "direction": "right", "speed": 320 },
+        { "direction": "up", "speed": 240 },
+        { "direction": "down", "speed": 240 }
       ]
     },
     {
       "stageNumber": 9,
       "iceBlocks": [
-        { "direction": "left", "speed": 250 },
-        { "direction": "right", "speed": 200 },
-        { "direction": "up", "speed": 150 },
-        { "direction": "right", "speed": 250 },
-        { "direction": "up", "speed": 120 },
-        { "direction": "left", "speed": 300 }
+        { "direction": "left", "speed": 340 },
+        { "direction": "right", "speed": 340 },
+        { "direction": "up", "speed": 260 },
+        { "direction": "down", "speed": 260 },
+        { "direction": "left", "speed": 360 },
+        { "direction": "right", "speed": 360 },
+        { "direction": "up", "speed": 280 },
+        { "direction": "down", "speed": 280 },
+        { "direction": "left", "speed": 380 }
       ]
     },
     {
       "stageNumber": 10,
       "iceBlocks": [
-        { "direction": "left", "speed": 300 },
-        { "direction": "right", "speed": 250 },
-        { "direction": "up", "speed": 150 },
-        { "direction": "down", "speed": 150 },
-        { "direction": "right", "speed": 300 },
-        { "direction": "left", "speed": 300 }
+        { "direction": "left", "speed": 400 },
+        { "direction": "right", "speed": 400 },
+        { "direction": "up", "speed": 300 },
+        { "direction": "down", "speed": 300 },
+        { "direction": "left", "speed": 420 },
+        { "direction": "right", "speed": 420 },
+        { "direction": "up", "speed": 320 },
+        { "direction": "down", "speed": 320 },
+        { "direction": "left", "speed": 440 },
+        { "direction": "right", "speed": 440 }
       ]
     },
     {
       "stageNumber": 11,
       "iceBlocks": [
-        { "direction": "left", "speed": 300 },
-        { "direction": "right", "speed": 250 },
-        { "direction": "up", "speed": 200 },
-        { "direction": "down", "speed": 200 },
-        { "direction": "right", "speed": 300 },
-        { "direction": "left", "speed": 300 },
-        { "direction": "up", "speed": 180 }
+        { "direction": "left", "speed": 460 },
+        { "direction": "right", "speed": 460 },
+        { "direction": "up", "speed": 340 },
+        { "direction": "down", "speed": 340 },
+        { "direction": "left", "speed": 480 },
+        { "direction": "right", "speed": 480 },
+        { "direction": "up", "speed": 360 },
+        { "direction": "down", "speed": 360 },
+        { "direction": "left", "speed": 500 },
+        { "direction": "right", "speed": 500 },
+        { "direction": "up", "speed": 380 }
       ]
     },
     {
       "stageNumber": 12,
       "iceBlocks": [
-        { "direction": "left", "speed": 350 },
-        { "direction": "right", "speed": 300 },
-        { "direction": "up", "speed": 200 },
-        { "direction": "down", "speed": 200 },
-        { "direction": "right", "speed": 300 },
-        { "direction": "left", "speed": 350 },
-        { "direction": "up", "speed": 180 },
-        { "direction": "down", "speed": 180 }
+        { "direction": "left", "speed": 520 },
+        { "direction": "right", "speed": 520 },
+        { "direction": "up", "speed": 400 },
+        { "direction": "down", "speed": 400 },
+        { "direction": "left", "speed": 540 },
+        { "direction": "right", "speed": 540 },
+        { "direction": "up", "speed": 420 },
+        { "direction": "down", "speed": 420 },
+        { "direction": "left", "speed": 560 },
+        { "direction": "right", "speed": 560 },
+        { "direction": "up", "speed": 440 },
+        { "direction": "down", "speed": 440 }
       ]
     },
     {
       "stageNumber": 13,
       "iceBlocks": [
-        { "direction": "left", "speed": 350 },
-        { "direction": "right", "speed": 300 },
-        { "direction": "up", "speed": 200 },
-        { "direction": "down", "speed": 200 },
-        { "direction": "right", "speed": 300 },
-        { "direction": "left", "speed": 350 },
-        { "direction": "up", "speed": 180 },
-        { "direction": "down", "speed": 180 },
-        { "direction": "left", "speed": 400 }
+        { "direction": "left", "speed": 580 },
+        { "direction": "right", "speed": 580 },
+        { "direction": "up", "speed": 460 },
+        { "direction": "down", "speed": 460 },
+        { "direction": "left", "speed": 600 },
+        { "direction": "right", "speed": 600 },
+        { "direction": "up", "speed": 480 },
+        { "direction": "down", "speed": 480 },
+        { "direction": "left", "speed": 620 },
+        { "direction": "right", "speed": 620 },
+        { "direction": "up", "speed": 500 },
+        { "direction": "down", "speed": 500 },
+        { "direction": "left", "speed": 640 }
       ]
     },
     {
       "stageNumber": 14,
       "iceBlocks": [
-        { "direction": "left", "speed": 400 },
-        { "direction": "right", "speed": 350 },
-        { "direction": "up", "speed": 200 },
-        { "direction": "down", "speed": 200 },
-        { "direction": "right", "speed": 350 },
-        { "direction": "left", "speed": 400 },
-        { "direction": "up", "speed": 180 },
-        { "direction": "down", "speed": 180 },
-        { "direction": "left", "speed": 450 },
-        { "direction": "right", "speed": 400 }
+        { "direction": "left", "speed": 660 },
+        { "direction": "right", "speed": 660 },
+        { "direction": "up", "speed": 520 },
+        { "direction": "down", "speed": 520 },
+        { "direction": "left", "speed": 680 },
+        { "direction": "right", "speed": 680 },
+        { "direction": "up", "speed": 540 },
+        { "direction": "down", "speed": 540 },
+        { "direction": "left", "speed": 700 },
+        { "direction": "right", "speed": 700 },
+        { "direction": "up", "speed": 560 },
+        { "direction": "down", "speed": 560 },
+        { "direction": "left", "speed": 720 },
+        { "direction": "right", "speed": 720 }
       ]
     },
     {
       "stageNumber": 15,
       "iceBlocks": [
-        { "direction": "left", "speed": 450 },
-        { "direction": "right", "speed": 400 },
-        { "direction": "up", "speed": 220 },
-        { "direction": "down", "speed": 220 },
-        { "direction": "right", "speed": 400 },
-        { "direction": "left", "speed": 450 },
-        { "direction": "up", "speed": 200 },
-        { "direction": "down", "speed": 200 },
-        { "direction": "left", "speed": 500 },
-        { "direction": "right", "speed": 450 },
-        { "direction": "up", "speed": 180 },
-        { "direction": "down", "speed": 180 }
+        { "direction": "left", "speed": 740 },
+        { "direction": "right", "speed": 740 },
+        { "direction": "up", "speed": 580 },
+        { "direction": "down", "speed": 580 },
+        { "direction": "left", "speed": 760 },
+        { "direction": "right", "speed": 760 },
+        { "direction": "up", "speed": 600 },
+        { "direction": "down", "speed": 600 },
+        { "direction": "left", "speed": 780 },
+        { "direction": "right", "speed": 780 },
+        { "direction": "up", "speed": 620 },
+        { "direction": "down", "speed": 620 },
+        { "direction": "left", "speed": 800 },
+        { "direction": "right", "speed": 800 },
+        { "direction": "up", "speed": 640 },
+        { "direction": "down", "speed": 640 }
       ]
     }
   ]
@@ -574,9 +611,9 @@ class MainScene extends Phaser.Scene {
             return;
         }
 
-        // サンタの初期位置
+        // サンタの初期位置（見切れないように調整）
         this.startX = this.cameras.main.centerX;
-        this.startY = this.cameras.main.height - 50;
+        this.startY = this.cameras.main.height - 100; // 画面下から100px上
 
         // サンタの作成
         this.santa = new Santa(this, this.startX, this.startY);
@@ -586,8 +623,10 @@ class MainScene extends Phaser.Scene {
         this.iceBlocks = this.stageConfig.iceBlocks.map(blockConfig => {
             // X位置を画面幅に応じて設定
             let x;
-            if (blockConfig.direction === 'left' || blockConfig.direction === 'right') {
-                x = Phaser.Math.Between(50, this.cameras.main.width - 50);
+            if (blockConfig.direction === 'left') {
+                x = this.cameras.main.width - 50;
+            } else if (blockConfig.direction === 'right') {
+                x = 50;
             } else {
                 x = Phaser.Math.Between(100, this.cameras.main.width - 100);
             }
@@ -607,21 +646,10 @@ class MainScene extends Phaser.Scene {
 
         // タップ操作の設定
         this.input.on('pointerdown', () => {
-            this.santa.moveUp();
-            // サンタを継続的に上に移動させるため、停止処理を削除
-            // このままだと、複数クリックで速度が重複する可能性があるため、制御を追加
+            // サンタが既に動いていない場合のみ移動を開始
             if (!this.isMovingUp) {
                 this.isMovingUp = true;
                 this.santa.moveUp();
-            }
-        });
-
-        // サンタがツリーに到達した際の停止処理を追加
-        this.santa.body.onWorldBounds = true;
-        this.physics.world.on('worldbounds', (body) => {
-            if (body.gameObject === this.santa) {
-                this.santa.stop();
-                this.isMovingUp = false;
             }
         });
 
@@ -648,6 +676,15 @@ class MainScene extends Phaser.Scene {
         if (this.stageNumber % 3 === 0 && !this.uiScene.displayedIntermediate.has(this.stageNumber)) {
             this.uiScene.showIntermediateMessage(this.stageNumber);
         }
+
+        // 継続的にサンタを動かす
+        if (this.isMovingUp) {
+            // サンタがゴールに到達した場合、動きを停止
+            if (this.santa.y <= 50) {
+                this.santa.stop();
+                this.isMovingUp = false;
+            }
+        }
     }
 }
 
@@ -671,6 +708,10 @@ function handleCollision(santa, iceBlock, scene) {
 
     // 衝突音の再生
     scene.sound.play('collision');
+
+    // サンタの移動を停止
+    santa.stop();
+    scene.isMovingUp = false;
 
     // UISceneにゲームオーバーを通知
     scene.scene.get('UIScene').showFailureMessage();
