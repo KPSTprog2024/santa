@@ -16,31 +16,236 @@ const stagesConfig = {
         { "direction": "right", "speed": 120 }
       ]
     },
-    // ... ステージ3から15も同様に定義します（省略） ...
+    {
+      "stageNumber": 3,
+      "iceBlocks": [
+        { "direction": "left", "speed": 140 },
+        { "direction": "right", "speed": 140 },
+        { "direction": "up", "speed": 100 }
+      ]
+    },
+    {
+      "stageNumber": 4,
+      "iceBlocks": [
+        { "direction": "left", "speed": 160 },
+        { "direction": "right", "speed": 160 },
+        { "direction": "up", "speed": 120 },
+        { "direction": "down", "speed": 120 }
+      ]
+    },
+    {
+      "stageNumber": 5,
+      "iceBlocks": [
+        { "direction": "left", "speed": 180 },
+        { "direction": "right", "speed": 180 },
+        { "direction": "up", "speed": 140 },
+        { "direction": "down", "speed": 140 },
+        { "direction": "left", "speed": 200 }
+      ]
+    },
+    {
+      "stageNumber": 6,
+      "iceBlocks": [
+        { "direction": "left", "speed": 220 },
+        { "direction": "right", "speed": 220 },
+        { "direction": "up", "speed": 160 },
+        { "direction": "down", "speed": 160 },
+        { "direction": "left", "speed": 240 },
+        { "direction": "right", "speed": 240 }
+      ]
+    },
+    {
+      "stageNumber": 7,
+      "iceBlocks": [
+        { "direction": "left", "speed": 260 },
+        { "direction": "right", "speed": 260 },
+        { "direction": "up", "speed": 180 },
+        { "direction": "down", "speed": 180 },
+        { "direction": "left", "speed": 280 },
+        { "direction": "right", "speed": 280 },
+        { "direction": "up", "speed": 200 }
+      ]
+    },
+    {
+      "stageNumber": 8,
+      "iceBlocks": [
+        { "direction": "left", "speed": 300 },
+        { "direction": "right", "speed": 300 },
+        { "direction": "up", "speed": 220 },
+        { "direction": "down", "speed": 220 },
+        { "direction": "left", "speed": 320 },
+        { "direction": "right", "speed": 320 },
+        { "direction": "up", "speed": 240 },
+        { "direction": "down", "speed": 240 }
+      ]
+    },
+    {
+      "stageNumber": 9,
+      "iceBlocks": [
+        { "direction": "left", "speed": 340 },
+        { "direction": "right", "speed": 340 },
+        { "direction": "up", "speed": 260 },
+        { "direction": "down", "speed": 260 },
+        { "direction": "left", "speed": 360 },
+        { "direction": "right", "speed": 360 },
+        { "direction": "up", "speed": 280 },
+        { "direction": "down", "speed": 280 },
+        { "direction": "left", "speed": 380 }
+      ]
+    },
+    {
+      "stageNumber": 10,
+      "iceBlocks": [
+        { "direction": "left", "speed": 400 },
+        { "direction": "right", "speed": 400 },
+        { "direction": "up", "speed": 300 },
+        { "direction": "down", "speed": 300 },
+        { "direction": "left", "speed": 420 },
+        { "direction": "right", "speed": 420 },
+        { "direction": "up", "speed": 320 },
+        { "direction": "down", "speed": 320 },
+        { "direction": "left", "speed": 440 },
+        { "direction": "right", "speed": 440 }
+      ]
+    },
+    {
+      "stageNumber": 11,
+      "iceBlocks": [
+        { "direction": "left", "speed": 460 },
+        { "direction": "right", "speed": 460 },
+        { "direction": "up", "speed": 340 },
+        { "direction": "down", "speed": 340 },
+        { "direction": "left", "speed": 480 },
+        { "direction": "right", "speed": 480 },
+        { "direction": "up", "speed": 360 },
+        { "direction": "down", "speed": 360 },
+        { "direction": "left", "speed": 500 },
+        { "direction": "right", "speed": 500 },
+        { "direction": "up", "speed": 380 }
+      ]
+    },
+    {
+      "stageNumber": 12,
+      "iceBlocks": [
+        { "direction": "left", "speed": 520 },
+        { "direction": "right", "speed": 520 },
+        { "direction": "up", "speed": 400 },
+        { "direction": "down", "speed": 400 },
+        { "direction": "left", "speed": 540 },
+        { "direction": "right", "speed": 540 },
+        { "direction": "up", "speed": 420 },
+        { "direction": "down", "speed": 420 },
+        { "direction": "left", "speed": 560 },
+        { "direction": "right", "speed": 560 },
+        { "direction": "up", "speed": 440 },
+        { "direction": "down", "speed": 440 }
+      ]
+    },
+    {
+      "stageNumber": 13,
+      "iceBlocks": [
+        { "direction": "left", "speed": 580 },
+        { "direction": "right", "speed": 580 },
+        { "direction": "up", "speed": 460 },
+        { "direction": "down", "speed": 460 },
+        { "direction": "left", "speed": 600 },
+        { "direction": "right", "speed": 600 },
+        { "direction": "up", "speed": 480 },
+        { "direction": "down", "speed": 480 },
+        { "direction": "left", "speed": 620 },
+        { "direction": "right", "speed": 620 },
+        { "direction": "up", "speed": 500 },
+        { "direction": "down", "speed": 500 },
+        { "direction": "left", "speed": 640 }
+      ]
+    },
+    {
+      "stageNumber": 14,
+      "iceBlocks": [
+        { "direction": "left", "speed": 660 },
+        { "direction": "right", "speed": 660 },
+        { "direction": "up", "speed": 520 },
+        { "direction": "down", "speed": 520 },
+        { "direction": "left", "speed": 680 },
+        { "direction": "right", "speed": 680 },
+        { "direction": "up", "speed": 540 },
+        { "direction": "down", "speed": 540 },
+        { "direction": "left", "speed": 700 },
+        { "direction": "right", "speed": 700 },
+        { "direction": "up", "speed": 560 },
+        { "direction": "down", "speed": 560 },
+        { "direction": "left", "speed": 720 },
+        { "direction": "right", "speed": 720 }
+      ]
+    },
+    {
+      "stageNumber": 15,
+      "iceBlocks": [
+        { "direction": "left", "speed": 740 },
+        { "direction": "right", "speed": 740 },
+        { "direction": "up", "speed": 580 },
+        { "direction": "down", "speed": 580 },
+        { "direction": "left", "speed": 760 },
+        { "direction": "right", "speed": 760 },
+        { "direction": "up", "speed": 600 },
+        { "direction": "down", "speed": 600 },
+        { "direction": "left", "speed": 780 },
+        { "direction": "right", "speed": 780 },
+        { "direction": "up", "speed": 620 },
+        { "direction": "down", "speed": 620 },
+        { "direction": "left", "speed": 800 },
+        { "direction": "right", "speed": 800 },
+        { "direction": "up", "speed": 640 },
+        { "direction": "down", "speed": 640 }
+      ]
+    }
   ]
 };
 
-// メッセージヘルパー関数（省略せずに記載）
+// メッセージヘルパー関数
 function getRandomMessage(type) {
     const clearMessages = [
-        // クリア時のメッセージ
         "めりーくりすます！ つぎはあのこのいえだ！",
         "やったね！ つぎのぷれぜんとをとどけにいこう！",
-        // ... 他のメッセージ ...
+        "めりーくりすます！ まだまだとどけるよ！",
+        "くりすますのよるはながいぞ！つぎにいくぞ！",
+        "おめでとう！さんたさん、つぎもがんばろう！",
+        "よくやった！ あのみちにもぷれぜんとをとどけにいくよ！",
+        "めりーくりすます！つぎはおそらをこえていくよ！",
+        "つぎのぷれぜんともとどけにいくぞ！",
+        "やったね！まだまだぷれぜんとをとどけるよ！",
+        "めりーくりすます！さあ、つぎのいえまでいそごう！",
+        "すばらしい！つぎのぷれぜんともまちがいなし！",
+        "さんたさん、もういちどちょうせんしてみよう！",
+        "くりすますのまほうをかんじて！つぎへすすもう！",
+        "すごい！つぎのすてーじもたのしもう！",
+        "めりーくりすます！さいごのすてーじだよ！"
     ];
 
     const failMessages = [
-        // 失敗時のメッセージ
         "おっと、あわてんぼうのさんたさんになっちゃった！",
         "こおりはすべるから、きをつけないと！",
-        // ... 他のメッセージ ...
+        "よし、もういちどためしてみよう！",
+        "あれれ？さんた、ゆきのなかでころんじゃった！",
+        "どんまい！さんたさん、こんどはうまくいくよ！",
+        "つぎはきをつけてすすもう！",
+        "さんたさん、こおりにはきをつけてね！",
+        "あわてずに、もういちどいこう！",
+        "さんたさんもちゃれんじがだいすきなんだ！",
+        "こんどはうまくいくさ！ふかふかのゆきもまってるよ！"
     ];
 
     const intermediateMessages = [
-        // 中間メッセージ
         "さんたさんのぷれぜんとは、どこにいくかな？",
         "ゆきのじかんが、ゆっくりとすすむよ。",
-        // ... 他のメッセージ ...
+        "さんたさんのまほうが、ゆきにきらめきをつける！",
+        "くりすますのまいにちが、もっとたのしくなるよ。",
+        "さんたさんといっしょに、もっとたのしいひをすごそう！",
+        "ゆきだまが、さんたさんをまっています！",
+        "さんたさん、せんせいからのきょうこくがきこえてきた！",
+        "まほうのぼうしが、さんたさんにひかっています！",
+        "ゆきのしろいまつりが、もうすぐおわるよ！",
+        "さんたさん、ひみつのまほうをみつけた！"
     ];
 
     if (type === 'clear') {
@@ -290,7 +495,8 @@ class MenuScene extends Phaser.Scene {
             fontSize: '32px',
             fill: '#00ff00',
             backgroundColor: '#000000',
-            padding: { x: 20, y: 10 }
+            padding: { x: 20, y: 10 },
+            align: 'center'
         }).setOrigin(0.5).setInteractive();
 
         startButton.on('pointerdown', () => {
@@ -304,14 +510,16 @@ class MenuScene extends Phaser.Scene {
             fontSize: '32px',
             fill: '#00ff00',
             backgroundColor: '#000000',
-            padding: { x: 20, y: 10 }
+            padding: { x: 20, y: 10 },
+            align: 'center'
         }).setOrigin(0.5).setInteractive();
 
         settingsButton.on('pointerdown', () => {
             if (!this.settingsMessage) {
                 this.settingsMessage = this.add.text(this.cameras.main.centerX, 600, '設定画面はまだです！', {
                     fontSize: '24px',
-                    fill: '#ff0000'
+                    fill: '#ff0000',
+                    align: 'center'
                 }).setOrigin(0.5);
             }
         });
@@ -332,7 +540,8 @@ class StageSelectScene extends Phaser.Scene {
         // ステージ選択タイトル
         this.add.text(this.cameras.main.centerX, 100, 'ステージをせんたく', {
             fontSize: '36px',
-            fill: '#ffffff'
+            fill: '#ffffff',
+            align: 'center'
         }).setOrigin(0.5);
 
         const stages = stagesConfig.stages;
@@ -355,7 +564,8 @@ class StageSelectScene extends Phaser.Scene {
                 fontSize: '20px',
                 fill: '#00ff00',
                 backgroundColor: '#000000',
-                padding: { x: 10, y: 10 }
+                padding: { x: 10, y: 10 },
+                align: 'center'
             }).setOrigin(0.5).setInteractive();
 
             stageButton.on('pointerdown', () => {
@@ -369,7 +579,8 @@ class StageSelectScene extends Phaser.Scene {
             fontSize: '28px',
             fill: '#ffffff',
             backgroundColor: '#ff0000',
-            padding: { x: 20, y: 10 }
+            padding: { x: 20, y: 10 },
+            align: 'center'
         }).setOrigin(0.5).setInteractive();
 
         menuButton.on('pointerdown', () => {
@@ -468,8 +679,8 @@ class MainScene extends Phaser.Scene {
             this.uiScene.showIntermediateMessage(this.stageNumber);
         }
 
-        // サンタが画面外に出ないようにチェック
-        if (this.santa.y < -50) {
+        // サンタがゴールに到達した場合、動きを停止
+        if (this.isMovingUp && this.santa.y <= 50) {
             this.santa.stop();
             this.isMovingUp = false;
         }
