@@ -403,6 +403,146 @@ class UIScene extends Phaser.Scene {
     }
 }
 
+// BootSceneクラス
+class BootScene extends Phaser.Scene {
+    constructor() {
+        super({ key: 'BootScene' });
+    }
+
+    preload() {
+        // 画像のロード
+        this.load.image('background', 'assets/images/background.png');
+        this.load.image('santa', 'assets/images/santa.png');
+        this.load.image('ice', 'assets/images/ice.png');
+        this.load.image('collision', 'assets/images/collision.png');
+
+        // 音声のロード
+        this.load.audio('bgm', ['assets/audio/bgm.mp3']);
+        this.load.audio('clear', ['assets/audio/clear.mp3']);
+        this.load.audio('fail', ['assets/audio/fail.mp3']);
+        this.load.audio('collision', ['assets/audio/collision.mp3']);
+    }
+
+    create() {
+        // BGMの再生
+        this.sound.play('bgm', { loop: true });
+
+        // ステージ設定をグローバルに保存
+        this.registry.set('stages', stagesConfig);
+
+        // メニューシーンへ遷移
+        this.scene.start('MenuScene');
+    }
+}
+
+// MenuSceneクラス
+class MenuScene extends Phaser.Scene {
+    constructor() {
+        super({ key: 'MenuScene' });
+    }
+
+    create() {
+        // 背景の表示
+        this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'background');
+
+        // タイトルテキスト
+        this.add.text(this.cameras.main.centerX, 200, 'おとどけサンタ', {
+            fontSize: '48px',
+            fill: '#ffffff'
+        }).setOrigin(0.5);
+
+        // スタートボタン
+        const startButton = this.add.text(this.cameras.main.centerX, 400, 'スタート', {
+            fontSize: '32px',
+            fill: '#00ff00',
+            backgroundColor: '#000000',
+            padding: { x: 20, y: 10 }
+        }).setOrigin(0.5).setInteractive();
+
+        startButton.on('pointerdown', () => {
+            // 最初のステージにリセット
+            this.registry.set('currentStage', 1);
+            this.scene.start('StageSelectScene');
+        });
+
+        // 設定ボタン（将来的な機能追加用）
+        const settingsButton = this.add.text(this.cameras.main.centerX, 500, 'せってい', {
+            fontSize: '32px',
+            fill: '#00ff00',
+            backgroundColor: '#000000',
+            padding: { x: 20, y: 10 }
+        }).setOrigin(0.5).setInteractive();
+
+        settingsButton.on('pointerdown', () => {
+            if (!this.settingsMessage) {
+                this.settingsMessage = this.add.text(this.cameras.main.centerX, 600, '設定画面はまだです！', {
+                    fontSize: '24px',
+                    fill: '#ff0000'
+                }).setOrigin(0.5);
+            }
+        });
+    }
+}
+
+// StageSelectSceneクラス
+class StageSelectScene extends Phaser.Scene {
+    constructor() {
+        super({ key: 'StageSelectScene' });
+    }
+
+    create() {
+        // 背景の表示
+        this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'background');
+
+        // ステージ選択タイトル
+        this.add.text(this.cameras.main.centerX, 100, 'ステージをせんたく', {
+            fontSize: '36px',
+            fill: '#ffffff'
+        }).setOrigin(0.5);
+
+        const stages = stagesConfig.stages;
+        const stagesPerRow = 3;
+        const buttonSize = 80;
+        const padding = 20;
+        const startX = this.cameras.main.centerX - ((stagesPerRow * (buttonSize + padding)) - padding) / 2 + buttonSize / 2;
+        const startY = 200;
+
+        stages.forEach((stage, index) => {
+            const row = Math.floor(index / stagesPerRow);
+            const col = index % stagesPerRow;
+
+            const x = startX + col * (buttonSize + padding);
+            const y = startY + row * (buttonSize + padding);
+
+            const stageButton = this.add.text(x, y, `Stage ${stage.stageNumber}`, {
+                fontSize: '24px',
+                fill: '#00ff00',
+                backgroundColor: '#000000',
+                padding: { x: 10, y: 10 }
+            }).setOrigin(0.5).setInteractive();
+
+            stageButton.on('pointerdown', () => {
+                this.registry.set('currentStage', stage.stageNumber);
+                this.scene.start('MainScene', { stageNumber: stage.stageNumber });
+            });
+        });
+
+        // メニューボタン
+        const menuButton = this.add.text(this.cameras.main.centerX, 700, 'メニューにかえる', {
+            fontSize: '28px',
+            fill: '#ffffff',
+            backgroundColor: '#ff0000',
+            padding: { x: 20, y: 10 }
+        }).setOrigin(0.5).setInteractive();
+
+        menuButton.on('pointerdown', () => {
+            this.scene.start('MenuScene');
+        });
+    }
+}
+
+// UISceneクラス（既に定義済み）
+
 // MainSceneクラス
 class MainScene extends Phaser.Scene {
     constructor() {
@@ -486,39 +626,31 @@ class MainScene extends Phaser.Scene {
     }
 }
 
-// BootSceneクラス
-class BootScene extends Phaser.Scene {
-    constructor() {
-        super({ key: 'BootScene' });
-    }
+// 衝突ハンドラー関数
+function handleCollision(santa, iceBlock, scene) {
+    // サンタと氷ブロックの衝突時の処理
+    santa.handleCollision();
+    iceBlock.handleCollision();
 
-    preload() {
-        // 画像のロード
-        this.load.image('background', 'assets/images/background.png');
-        this.load.image('santa', 'assets/images/santa.png');
-        this.load.image('ice', 'assets/images/ice.png');
-        this.load.image('collision', 'assets/images/collision.png');
+    // 衝突エフェクトの表示
+    const collisionEffect = scene.add.image(santa.x, santa.y, 'collision');
+    scene.tweens.add({
+        targets: collisionEffect,
+        alpha: 0,
+        duration: 500,
+        onComplete: () => {
+            collisionEffect.destroy();
+        }
+    });
 
-        // 音声のロード
-        this.load.audio('bgm', ['assets/audio/bgm.mp3']);
-        this.load.audio('clear', ['assets/audio/clear.mp3']);
-        this.load.audio('fail', ['assets/audio/fail.mp3']);
-        this.load.audio('collision', ['assets/audio/collision.mp3']);
-    }
+    // 衝突音の再生
+    scene.sound.play('collision');
 
-    create() {
-        // BGMの再生
-        this.sound.play('bgm', { loop: true });
-
-        // ステージ設定をグローバルに保存
-        this.registry.set('stages', stagesConfig);
-
-        // メニューシーンへ遷移
-        this.scene.start('MenuScene');
-    }
+    // UISceneにゲームオーバーを通知
+    scene.scene.get('UIScene').showFailureMessage();
 }
 
-// UISceneクラスをゲームに追加
+// Phaser.Gameの設定
 const config = {
     type: Phaser.AUTO,
     width: 480, // 縦画面を想定
