@@ -3,16 +3,165 @@
 // ステージ設定を直接定義
 const stagesConfig = {
   "stages": [
-    // ステージ1から15までの設定をここに記載（省略）
-    // 以前と同じ内容を使用してください
-    // 例:
     {
       "stageNumber": 1,
       "iceBlocks": [
         { "direction": "left", "speed": 100 }
       ]
     },
-    // ... ステージ2から15まで続く
+    {
+      "stageNumber": 2,
+      "iceBlocks": [
+        { "direction": "left", "speed": 100 },
+        { "direction": "right", "speed": 100 }
+      ]
+    },
+    {
+      "stageNumber": 3,
+      "iceBlocks": [
+        { "direction": "left", "speed": 150 },
+        { "direction": "right", "speed": 100 }
+      ]
+    },
+    {
+      "stageNumber": 4,
+      "iceBlocks": [
+        { "direction": "left", "speed": 150 },
+        { "direction": "right", "speed": 100 },
+        { "direction": "up", "speed": 80 }
+      ]
+    },
+    {
+      "stageNumber": 5,
+      "iceBlocks": [
+        { "direction": "left", "speed": 150 },
+        { "direction": "right", "speed": 100 },
+        { "direction": "up", "speed": 80 },
+        { "direction": "left", "speed": 200 }
+      ]
+    },
+    {
+      "stageNumber": 6,
+      "iceBlocks": [
+        { "direction": "left", "speed": 200 },
+        { "direction": "right", "speed": 150 },
+        { "direction": "up", "speed": 100 },
+        { "direction": "right", "speed": 200 }
+      ]
+    },
+    {
+      "stageNumber": 7,
+      "iceBlocks": [
+        { "direction": "left", "speed": 200 },
+        { "direction": "right", "speed": 150 },
+        { "direction": "up", "speed": 100 },
+        { "direction": "right", "speed": 200 },
+        { "direction": "left", "speed": 250 }
+      ]
+    },
+    {
+      "stageNumber": 8,
+      "iceBlocks": [
+        { "direction": "left", "speed": 250 },
+        { "direction": "right", "speed": 200 },
+        { "direction": "up", "speed": 150 },
+        { "direction": "right", "speed": 250 },
+        { "direction": "up", "speed": 120 }
+      ]
+    },
+    {
+      "stageNumber": 9,
+      "iceBlocks": [
+        { "direction": "left", "speed": 250 },
+        { "direction": "right", "speed": 200 },
+        { "direction": "up", "speed": 150 },
+        { "direction": "right", "speed": 250 },
+        { "direction": "up", "speed": 120 },
+        { "direction": "left", "speed": 300 }
+      ]
+    },
+    {
+      "stageNumber": 10,
+      "iceBlocks": [
+        { "direction": "left", "speed": 300 },
+        { "direction": "right", "speed": 250 },
+        { "direction": "up", "speed": 150 },
+        { "direction": "down", "speed": 150 },
+        { "direction": "right", "speed": 300 },
+        { "direction": "left", "speed": 300 }
+      ]
+    },
+    {
+      "stageNumber": 11,
+      "iceBlocks": [
+        { "direction": "left", "speed": 300 },
+        { "direction": "right", "speed": 250 },
+        { "direction": "up", "speed": 200 },
+        { "direction": "down", "speed": 200 },
+        { "direction": "right", "speed": 300 },
+        { "direction": "left", "speed": 300 },
+        { "direction": "up", "speed": 180 }
+      ]
+    },
+    {
+      "stageNumber": 12,
+      "iceBlocks": [
+        { "direction": "left", "speed": 350 },
+        { "direction": "right", "speed": 300 },
+        { "direction": "up", "speed": 200 },
+        { "direction": "down", "speed": 200 },
+        { "direction": "right", "speed": 300 },
+        { "direction": "left", "speed": 350 },
+        { "direction": "up", "speed": 180 },
+        { "direction": "down", "speed": 180 }
+      ]
+    },
+    {
+      "stageNumber": 13,
+      "iceBlocks": [
+        { "direction": "left", "speed": 350 },
+        { "direction": "right", "speed": 300 },
+        { "direction": "up", "speed": 200 },
+        { "direction": "down", "speed": 200 },
+        { "direction": "right", "speed": 300 },
+        { "direction": "left", "speed": 350 },
+        { "direction": "up", "speed": 180 },
+        { "direction": "down", "speed": 180 },
+        { "direction": "left", "speed": 400 }
+      ]
+    },
+    {
+      "stageNumber": 14,
+      "iceBlocks": [
+        { "direction": "left", "speed": 400 },
+        { "direction": "right", "speed": 350 },
+        { "direction": "up", "speed": 200 },
+        { "direction": "down", "speed": 200 },
+        { "direction": "right", "speed": 350 },
+        { "direction": "left", "speed": 400 },
+        { "direction": "up", "speed": 180 },
+        { "direction": "down", "speed": 180 },
+        { "direction": "left", "speed": 450 },
+        { "direction": "right", "speed": 400 }
+      ]
+    },
+    {
+      "stageNumber": 15,
+      "iceBlocks": [
+        { "direction": "left", "speed": 450 },
+        { "direction": "right", "speed": 400 },
+        { "direction": "up", "speed": 220 },
+        { "direction": "down", "speed": 220 },
+        { "direction": "right", "speed": 400 },
+        { "direction": "left", "speed": 450 },
+        { "direction": "up", "speed": 200 },
+        { "direction": "down", "speed": 200 },
+        { "direction": "left", "speed": 500 },
+        { "direction": "right", "speed": 450 },
+        { "direction": "up", "speed": 180 },
+        { "direction": "down", "speed": 180 }
+      ]
+    }
   ]
 };
 
@@ -21,19 +170,45 @@ function getRandomMessage(type) {
     const clearMessages = [
         "めりーくりすます！ つぎはあのこのいえだ！",
         "やったね！ つぎのぷれぜんとをとどけにいこう！",
-        // ... 他のクリアメッセージ
+        "めりーくりすます！ まだまだとどけるよ！",
+        "くりすますのよるはながいぞ！つぎにいくぞ！",
+        "おめでとう！さんたさん、つぎもがんばろう！",
+        "よくやった！ あのみちにもぷれぜんとをとどけにいくよ！",
+        "めりーくりすます！つぎはおそらをこえていくよ！",
+        "つぎのぷれぜんともとどけにいくぞ！",
+        "やったね！まだまだぷれぜんとをとどけるよ！",
+        "めりーくりすます！さあ、つぎのいえまでいそごう！",
+        "すばらしい！つぎのぷれぜんともまちがいなし！",
+        "さんたさん、もういちどちょうせんしてみよう！",
+        "くりすますのまほうをかんじて！つぎへすすもう！",
+        "すごい！つぎのすてーじもたのしもう！",
+        "めりーくりすます！さいごのすてーじだよ！"
     ];
 
     const failMessages = [
         "おっと、あわてんぼうのさんたさんになっちゃった！",
         "こおりはすべるから、きをつけないと！",
-        // ... 他の失敗メッセージ
+        "よし、もういちどためしてみよう！",
+        "あれれ？さんた、ゆきのなかでころんじゃった！",
+        "どんまい！さんたさん、こんどはうまくいくよ！",
+        "つぎはきをつけてすすもう！",
+        "さんたさん、こおりにはきをつけてね！",
+        "あわてずに、もういちどいこう！",
+        "さんたさんもちゃれんじがだいすきなんだ！",
+        "こんどはうまくいくさ！ふかふかのゆきもまってるよ！"
     ];
 
     const intermediateMessages = [
         "さんたさんのぷれぜんとは、どこにいくかな？",
         "ゆきのじかんが、ゆっくりとすすむよ。",
-        // ... 他の中間メッセージ
+        "さんたさんのまほうが、ゆきにきらめきをつける！",
+        "くりすますのまいにちが、もっとたのしくなるよ。",
+        "さんたさんといっしょに、もっとたのしいひをすごそう！",
+        "ゆきだまが、さんたさんをまっています！",
+        "さんたさん、せんせいからのきょうこくがきこえてきた！",
+        "まほうのぼうしが、さんたさんにひかっています！",
+        "ゆきのしろいまつりが、もうすぐおわるよ！",
+        "さんたさん、ひみつのまほうをみつけた！"
     ];
 
     if (type === 'clear') {
@@ -48,25 +223,8 @@ function getRandomMessage(type) {
 }
 
 // 画像サイズを適切に調整する関数
-function resizeSprite(sprite, maxWidth, maxHeight) {
-    const originalWidth = sprite.width;
-    const originalHeight = sprite.height;
-    let newWidth = originalWidth;
-    let newHeight = originalHeight;
-
-    // 幅が最大幅を超えている場合
-    if (originalWidth > maxWidth) {
-        newWidth = maxWidth;
-        newHeight = (maxWidth / originalWidth) * originalHeight;
-    }
-
-    // 高さが最大高さを超えている場合
-    if (newHeight > maxHeight) {
-        newHeight = maxHeight;
-        newWidth = (maxHeight / originalHeight) * newWidth;
-    }
-
-    sprite.setDisplaySize(newWidth, newHeight);
+function resizeSprite(sprite, targetWidth, targetHeight) {
+    sprite.setDisplaySize(targetWidth, targetHeight);
     return sprite;
 }
 
@@ -352,20 +510,21 @@ class StageSelectScene extends Phaser.Scene {
 
         const stages = stagesConfig.stages;
         const stagesPerRow = 3;
-        const buttonSize = 80;
+        const buttonWidth = 100;
+        const buttonHeight = 40;
         const padding = 20;
-        const startX = this.cameras.main.centerX - ((stagesPerRow * (buttonSize + padding)) - padding) / 2 + buttonSize / 2;
+        const startX = this.cameras.main.centerX - ((stagesPerRow * (buttonWidth + padding)) - padding) / 2 + buttonWidth / 2;
         const startY = 200;
 
         stages.forEach((stage, index) => {
             const row = Math.floor(index / stagesPerRow);
             const col = index % stagesPerRow;
 
-            const x = startX + col * (buttonSize + padding);
-            const y = startY + row * (buttonSize + padding);
+            const x = startX + col * (buttonWidth + padding);
+            const y = startY + row * (buttonHeight + padding);
 
             const stageButton = this.add.text(x, y, `Stage ${stage.stageNumber}`, {
-                fontSize: '24px',
+                fontSize: '20px',
                 fill: '#00ff00',
                 backgroundColor: '#000000',
                 padding: { x: 10, y: 10 }
@@ -449,10 +608,21 @@ class MainScene extends Phaser.Scene {
         // タップ操作の設定
         this.input.on('pointerdown', () => {
             this.santa.moveUp();
-            // サンタを定速で上に移動させるため、時間経過で停止
-            this.time.delayedCall(300, () => {
+            // サンタを継続的に上に移動させるため、停止処理を削除
+            // このままだと、複数クリックで速度が重複する可能性があるため、制御を追加
+            if (!this.isMovingUp) {
+                this.isMovingUp = true;
+                this.santa.moveUp();
+            }
+        });
+
+        // サンタがツリーに到達した際の停止処理を追加
+        this.santa.body.onWorldBounds = true;
+        this.physics.world.on('worldbounds', (body) => {
+            if (body.gameObject === this.santa) {
                 this.santa.stop();
-            }, [], this);
+                this.isMovingUp = false;
+            }
         });
 
         // ゴール地点の設定（クリスマスツリー）
@@ -465,6 +635,8 @@ class MainScene extends Phaser.Scene {
         // サンタとゴールの衝突判定
         this.physics.add.overlap(this.santa, this.goal, () => {
             this.scene.get('UIScene').showSuccessMessage();
+            this.santa.stop();
+            this.isMovingUp = false;
         }, null, this);
 
         // UISceneを取得
