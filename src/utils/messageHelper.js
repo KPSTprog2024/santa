@@ -55,4 +55,3 @@ export function getRandomMessage(type) {
         return "";
     }
 }
-
