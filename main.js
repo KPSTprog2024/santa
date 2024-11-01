@@ -430,6 +430,10 @@ class UIScene extends Phaser.Scene {
     }
 
     showSuccessMessage() {
+        if (this.messageContainer.visible) {
+            return; // 既にメッセージが表示されている場合は何もしない
+        }
+
         const message = getRandomMessage('clear');
         this.messageText.setText(message);
         this.nextStageButton.setVisible(true);
@@ -437,6 +441,10 @@ class UIScene extends Phaser.Scene {
     }
 
     showFailureMessage() {
+        if (this.messageContainer.visible) {
+            return; // 既にメッセージが表示されている場合は何もしない
+        }
+
         const message = getRandomMessage('fail');
         this.messageText.setText(message);
         this.retryButton.setVisible(true);
@@ -466,6 +474,10 @@ class UIScene extends Phaser.Scene {
     }
 
     showFinalMessage() {
+        if (this.messageContainer.visible) {
+            return; // 既にメッセージが表示されている場合は何もしない
+        }
+
         const message = "すべてのステージをクリアしました！めりーくりすます！";
         this.messageText.setText(message);
         this.nextStageButton.setText('メニューに戻る').setVisible(true);
@@ -652,6 +664,7 @@ class MainScene extends Phaser.Scene {
 
     init(data) {
         this.stageNumber = data.stageNumber || 1;
+        this.isStageCleared = false; // ステージクリアフラグ
     }
 
     create() {
@@ -699,7 +712,9 @@ class MainScene extends Phaser.Scene {
 
         // 衝突判定の設定
         this.physics.add.overlap(this.santa, this.iceBlocks, (santa, iceBlock) => {
-            handleCollision(santa, iceBlock, this);
+            if (!this.isStageCleared) {
+                handleCollision(santa, iceBlock, this);
+            }
         }, null, this);
 
         // タップ操作の設定
@@ -720,9 +735,12 @@ class MainScene extends Phaser.Scene {
 
         // サンタとゴールの衝突判定
         this.physics.add.overlap(this.santa, this.goal, () => {
-            this.scene.get('UIScene').showSuccessMessage();
-            this.santa.stop();
-            this.isMovingUp = false;
+            if (!this.isStageCleared) {
+                this.isStageCleared = true;
+                this.scene.get('UIScene').showSuccessMessage();
+                this.santa.stop();
+                this.isMovingUp = false;
+            }
         }, null, this);
 
         // UISceneを取得
