@@ -348,40 +348,52 @@ class UIScene extends Phaser.Scene {
     }
 
     create() {
+        // メッセージコンテナの初期化
+        this.messageContainer = this.add.container(this.cameras.main.centerX, this.cameras.main.centerY);
+        this.messageContainer.setDepth(1);
+        this.messageContainer.setVisible(false);
+
         // メッセージテキストの初期化
-        this.messageText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, '', {
+        this.messageText = this.add.text(0, -40, '', {
             fontSize: '24px',
             fill: '#ffffff',
             backgroundColor: '#000000',
             padding: { x: 10, y: 10 },
             align: 'center',
-            wordWrap: { width: this.cameras.main.width - 40, useAdvancedWrap: true }
-        }).setOrigin(0.5).setDepth(1).setVisible(false);
+            wordWrap: { width: this.cameras.main.width - 80, useAdvancedWrap: true }
+        }).setOrigin(0.5);
+        this.messageContainer.add(this.messageText);
 
         // ボタンの初期化
-        this.retryButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 60, 'もういっかいはこぶ！', {
+        this.retryButton = this.add.text(0, 20, 'もういっかいはこぶ！', {
             fontSize: '22px',
             fill: '#00ff00',
             backgroundColor: '#000000',
             padding: { x: 10, y: 5 },
             align: 'center'
-        }).setOrigin(0.5).setDepth(1).setInteractive().setVisible(false);
+        }).setOrigin(0.5).setInteractive();
+        this.retryButton.setVisible(false);
+        this.messageContainer.add(this.retryButton);
 
-        this.menuButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 110, 'さいしょにもどる', {
+        this.menuButton = this.add.text(0, 60, 'さいしょにもどる', {
             fontSize: '22px',
             fill: '#00ff00',
             backgroundColor: '#000000',
             padding: { x: 10, y: 5 },
             align: 'center'
-        }).setOrigin(0.5).setDepth(1).setInteractive().setVisible(false);
+        }).setOrigin(0.5).setInteractive();
+        this.menuButton.setVisible(false);
+        this.messageContainer.add(this.menuButton);
 
-        this.nextStageButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 160, 'つぎのすてーじへ', {
+        this.nextStageButton = this.add.text(0, 100, 'つぎのすてーじへ', {
             fontSize: '22px',
             fill: '#00ff00',
             backgroundColor: '#000000',
             padding: { x: 10, y: 5 },
             align: 'center'
-        }).setOrigin(0.5).setDepth(1).setInteractive().setVisible(false);
+        }).setOrigin(0.5).setInteractive();
+        this.nextStageButton.setVisible(false);
+        this.messageContainer.add(this.nextStageButton);
 
         // ボタンのイベント設定
         this.retryButton.on('pointerdown', () => {
@@ -415,21 +427,24 @@ class UIScene extends Phaser.Scene {
 
     showSuccessMessage() {
         const message = getRandomMessage('clear');
-        this.messageText.setText(message).setVisible(true);
+        this.messageText.setText(message);
         this.nextStageButton.setVisible(true);
+        this.messageContainer.setVisible(true);
     }
 
     showFailureMessage() {
         const message = getRandomMessage('fail');
-        this.messageText.setText(message).setVisible(true);
+        this.messageText.setText(message);
         this.retryButton.setVisible(true);
-        this.menuButton.setVisible(true); // 「さいしょにもどる」ボタンを表示
+        this.menuButton.setVisible(true);
+        this.messageContainer.setVisible(true);
     }
 
     showIntermediateMessage(stageNumber) {
         if (!this.displayedIntermediate.has(stageNumber)) {
             const message = getRandomMessage('intermediate');
-            this.messageText.setText(message).setVisible(true);
+            this.messageText.setText(message);
+            this.messageContainer.setVisible(true);
             this.displayedIntermediate.add(stageNumber);
 
             // メッセージを2秒後に自動で非表示
@@ -440,7 +455,7 @@ class UIScene extends Phaser.Scene {
     }
 
     hideMessages() {
-        this.messageText.setVisible(false);
+        this.messageContainer.setVisible(false);
         this.retryButton.setVisible(false);
         this.menuButton.setVisible(false);
         this.nextStageButton.setVisible(false);
@@ -448,9 +463,14 @@ class UIScene extends Phaser.Scene {
 
     showFinalMessage() {
         const message = "すべてのステージをクリアしました！めりーくりすます！";
-        this.messageText.setText(message).setVisible(true);
+        this.messageText.setText(message);
         this.nextStageButton.setText('メニューに戻る').setVisible(true);
-        this.nextStageButton.off('pointerdown'); // 既存のイベントを削除
+        this.messageContainer.setVisible(true);
+
+        // 一旦既存のイベントを削除
+        this.nextStageButton.off('pointerdown');
+
+        // 新しいイベントを設定
         this.nextStageButton.on('pointerdown', () => {
             this.hideMessages();
             this.scene.start('MenuScene');
