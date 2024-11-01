@@ -24,18 +24,19 @@ body {
     position: absolute;
     pointer-events: all;
     padding: 1vw 2vw;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     border: none;
     border-radius: 1vw;
     cursor: pointer;
     font-size: 4vw;
     font-family: 'Arial', sans-serif;
-    transition: transform 0.2s;
+    transition: transform 0.2s, background-color 0.2s;
     color: #333;
 }
 
 .button:hover {
     transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 1);
 }
 
 #message {
