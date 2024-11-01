@@ -223,8 +223,6 @@ const stagesConfig = {
         { "direction": "right", "speed": 192 },
         { "direction": "left", "speed": 192 },
         { "direction": "right", "speed": 192 },
-        { "direction": "left", "speed": 192 },
-        { "direction": "right", "speed": 192 },
         { "direction": "left", "speed": 192 }
       ]
     }
@@ -665,6 +663,9 @@ class MainScene extends Phaser.Scene {
         // サンタの作成
         this.santa = new Santa(this, this.startX, this.startY);
         resizeSprite(this.santa, 50, 50); // サンタのサイズを調整
+
+        // isMovingUp の初期化
+        this.isMovingUp = false;
 
         // 氷ブロックの作成
         this.iceBlocks = [];
