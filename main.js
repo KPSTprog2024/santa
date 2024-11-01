@@ -7,7 +7,7 @@
     // ゲームの状態
     let gameState = 'mainMenu'; // 'mainMenu', 'stageSelect', 'playing', 'gameOver', 'stageClear', 'allClear'
     let currentStage = 1;
-    const totalStages = 5;
+    const totalStages = 10; // ステージ数を10に増加
 
     // モジュールの初期化（UIManagerを先に初期化）
     const assetManager = new AssetManager();
@@ -22,7 +22,7 @@
 
     // 画面サイズの調整（アスペクト比の維持）
     function resizeCanvas() {
-        let aspectRatio = 16 / 9; // 基準となるアスペクト比（縦長）
+        let aspectRatio = 9 / 16; // 基準となるアスペクト比（縦長）
         let windowAspect = window.innerHeight / window.innerWidth;
 
         if (windowAspect > aspectRatio) {
@@ -90,7 +90,7 @@
         uiManager.createButton('すたーと', () => {
             gameState = 'stageSelect';
             showStageSelect();
-        });
+        }, canvas.width / 2 - canvas.width * 0.075, canvas.height / 2, canvas.width * 0.15, canvas.height * 0.1);
     }
 
     // ステージ選択画面の表示
@@ -120,8 +120,8 @@
         uiManager.clearUI();
 
         // プレイヤーとその他のオブジェクトを初期化
-        player = new Player(canvas.width / 2 - canvas.width * 0.04, canvas.height - canvas.height * 0.15);
-        goal = new Goal(canvas.width / 2 - canvas.width * 0.04, canvas.height * 0.05);
+        player = new Player(canvas.width / 2 - canvas.width * 0.035, canvas.height - canvas.height * 0.15);
+        goal = new Goal(canvas.width / 2 - canvas.width * 0.035, canvas.height * 0.05);
         enemies = [];
         stageManager = new StageManager(stageNumber);
         collisionManager = new CollisionManager();
@@ -141,7 +141,7 @@
         uiManager.createButton('すてーじせんたくにもどる', () => {
             gameState = 'stageSelect';
             showStageSelect();
-        });
+        }, canvas.width / 2 - canvas.width * 0.15, canvas.height / 2, canvas.width * 0.3, canvas.height * 0.1);
     }
 
     // ステージクリア処理
@@ -155,7 +155,7 @@
             uiManager.createButton('すてーじせんたくにもどる', () => {
                 gameState = 'stageSelect';
                 showStageSelect();
-            });
+            }, canvas.width / 2 - canvas.width * 0.15, canvas.height / 2, canvas.width * 0.3, canvas.height * 0.1);
         }
     }
 
@@ -164,6 +164,10 @@
         gameState = 'allClear';
         soundManager.playSound('clear');
         uiManager.showMessage('ぜんすてーじくりあ！おめでとう！');
+        uiManager.createButton('はじめににもどる', () => {
+            gameState = 'mainMenu';
+            showMainMenu();
+        }, canvas.width / 2 - canvas.width * 0.15, canvas.height / 2, canvas.width * 0.3, canvas.height * 0.1);
     }
 
     // プレイヤーモジュール
@@ -184,9 +188,6 @@
             if (this.isMoving) {
                 this.y -= this.speed;
             }
-
-            // ゴールに向かって一定速度で移動
-            // yの位置がゴールに達したら自動的に停止し、ステージクリアが呼び出される
 
             // 画面外に出ないようにする
             if (this.y < 0) {
@@ -221,8 +222,7 @@
                 if (this.x <= 0 || this.x >= canvas.width - this.width) {
                     this.direction *= -1;
                 }
-            } else if (this.movementPattern === 'zigzag') {
-                this.x += this.speed * Math.cos(Date.now() / 500);
+            } else if (this.movementPattern === 'vertical') {
                 this.y += this.speed * this.direction;
                 if (this.y <= canvas.height * 0.3 || this.y >= canvas.height * 0.7) { // スタート地点近くを避ける
                     this.direction *= -1;
@@ -231,11 +231,11 @@
 
             // 時々スピードアップ
             if (Math.random() < 0.005) {
-                this.speed = Math.min(this.speed * 1.05, canvas.width * 0.007); // 上限を設定
+                this.speed = Math.min(this.speed * 1.05, canvas.height * 0.007); // 上限を設定
             }
 
             // 下限を設定
-            this.speed = Math.max(this.speed, canvas.width * 0.003);
+            this.speed = Math.max(this.speed, canvas.height * 0.003);
         };
 
         this.draw = function (ctx) {
@@ -295,130 +295,39 @@
             const enemyConfigs = [];
 
             // ステージ設計
-            switch (stageNumber) {
-                case 1:
-                    // ステージ1：敵1体、速度ゆっくり、横移動
+            // ステージ1: 1体, horizontal
+            // ステージ2: 2体, horizontal
+            // ステージ3: 3体, horizontal
+            // ステージ4: 4体, vertical
+            // ステージ5: 5体, vertical
+            // ステージ6: 6体, horizontal and vertical
+            // ステージ7: 7体, horizontal and vertical
+            // ステージ8: 8体, horizontal and vertical
+            // ステージ9: 9体, horizontal and vertical
+            // ステージ10:10体, horizontal and vertical
+
+            for (let i = 1; i <= stageNumber; i++) {
+                if (i <= 5) {
+                    // 初めの5ステージは主にhorizontalまたはvertical
                     enemyConfigs.push({
-                        x: 0,
-                        y: canvas.height * 0.4,
-                        speed: canvas.height * 0.003, // スピード基準を高さに基づく
-                        direction: 1,
-                        movementPattern: 'horizontal'
+                        x: Math.random() * (canvas.width - canvas.width * 0.07),
+                        y: canvas.height * 0.3 + Math.random() * (canvas.height * 0.4),
+                        speed: canvas.height * (0.003 + (i - 1) * 0.000333), // ステージごとに速度増加
+                        direction: Math.random() < 0.5 ? 1 : -1,
+                        movementPattern: i <= 3 ? 'horizontal' : 'vertical'
                     });
-                    break;
-                case 2:
-                    // ステージ2：敵2体、速度やや速い、ジグザグ移動
+                } else {
+                    // ステージ6〜10はランダムにhorizontalまたはvertical
                     enemyConfigs.push({
-                        x: canvas.width * 0.3,
-                        y: canvas.height * 0.3,
-                        speed: canvas.height * 0.004,
-                        direction: 1,
-                        movementPattern: 'zigzag'
+                        x: Math.random() * (canvas.width - canvas.width * 0.07),
+                        y: canvas.height * 0.3 + Math.random() * (canvas.height * 0.4),
+                        speed: canvas.height * (0.003 + (i - 1) * 0.000333),
+                        direction: Math.random() < 0.5 ? 1 : -1,
+                        movementPattern: Math.random() < 0.5 ? 'horizontal' : 'vertical'
                     });
-                    enemyConfigs.push({
-                        x: canvas.width * 0.5,
-                        y: canvas.height * 0.5,
-                        speed: canvas.height * 0.004,
-                        direction: -1,
-                        movementPattern: 'zigzag'
-                    });
-                    break;
-                case 3:
-                    // ステージ3：敵3体、速度中、横移動とジグザグ混合
-                    enemyConfigs.push({
-                        x: 0,
-                        y: canvas.height * 0.25,
-                        speed: canvas.height * 0.005,
-                        direction: 1,
-                        movementPattern: 'horizontal'
-                    });
-                    enemyConfigs.push({
-                        x: canvas.width * 0.5,
-                        y: canvas.height * 0.4,
-                        speed: canvas.height * 0.005,
-                        direction: -1,
-                        movementPattern: 'zigzag'
-                    });
-                    enemyConfigs.push({
-                        x: 0,
-                        y: canvas.height * 0.55,
-                        speed: canvas.height * 0.005,
-                        direction: 1,
-                        movementPattern: 'horizontal'
-                    });
-                    break;
-                case 4:
-                    // ステージ4：敵4体、速度速い、動きに変化
-                    enemyConfigs.push({
-                        x: canvas.width * 0.1,
-                        y: canvas.height * 0.3,
-                        speed: canvas.height * 0.006,
-                        direction: 1,
-                        movementPattern: 'zigzag'
-                    });
-                    enemyConfigs.push({
-                        x: canvas.width * 0.6,
-                        y: canvas.height * 0.35,
-                        speed: canvas.height * 0.006,
-                        direction: -1,
-                        movementPattern: 'horizontal'
-                    });
-                    enemyConfigs.push({
-                        x: canvas.width * 0.2,
-                        y: canvas.height * 0.5,
-                        speed: canvas.height * 0.006,
-                        direction: 1,
-                        movementPattern: 'zigzag'
-                    });
-                    enemyConfigs.push({
-                        x: canvas.width * 0.7,
-                        y: canvas.height * 0.65,
-                        speed: canvas.height * 0.006,
-                        direction: -1,
-                        movementPattern: 'horizontal'
-                    });
-                    break;
-                case 5:
-                    // ステージ5：敵5体、速度非常に速い、複雑な動き
-                    enemyConfigs.push({
-                        x: 0,
-                        y: canvas.height * 0.15,
-                        speed: canvas.height * 0.007,
-                        direction: 1,
-                        movementPattern: 'zigzag'
-                    });
-                    enemyConfigs.push({
-                        x: canvas.width * 0.5,
-                        y: canvas.height * 0.3,
-                        speed: canvas.height * 0.007,
-                        direction: -1,
-                        movementPattern: 'horizontal'
-                    });
-                    enemyConfigs.push({
-                        x: canvas.width * 0.2,
-                        y: canvas.height * 0.45,
-                        speed: canvas.height * 0.007,
-                        direction: 1,
-                        movementPattern: 'zigzag'
-                    });
-                    enemyConfigs.push({
-                        x: canvas.width * 0.6,
-                        y: canvas.height * 0.6,
-                        speed: canvas.height * 0.007,
-                        direction: -1,
-                        movementPattern: 'horizontal'
-                    });
-                    enemyConfigs.push({
-                        x: canvas.width * 0.1,
-                        y: canvas.height * 0.75,
-                        speed: canvas.height * 0.007,
-                        direction: 1,
-                        movementPattern: 'zigzag'
-                    });
-                    break;
-                default:
-                    break;
+                }
             }
+
             return enemyConfigs;
         };
     }
