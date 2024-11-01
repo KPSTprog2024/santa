@@ -4,10 +4,21 @@
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
-    // 画面サイズの調整（モバイル対応）
+    // 画面サイズの調整（アスペクト比の維持）
     function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        let aspectRatio = 9 / 16; // 基準となるアスペクト比（縦長）
+        let windowAspect = window.innerHeight / window.innerWidth;
+
+        if (windowAspect > aspectRatio) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerWidth * aspectRatio;
+        } else {
+            canvas.height = window.innerHeight;
+            canvas.width = window.innerHeight / aspectRatio;
+        }
+
+        // UIの位置を再調整
+        uiManager.updateUIPositions();
     }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
@@ -74,7 +85,7 @@
     function showMainMenu() {
         uiManager.clearUI();
         uiManager.showTitle('おとどけさんた');
-        uiManager.createButton('すたーと', canvas.width / 2 - 75, canvas.height / 2, () => {
+        uiManager.createButton('すたーと', () => {
             gameState = 'stageSelect';
             showStageSelect();
         });
@@ -84,20 +95,20 @@
     function showStageSelect() {
         uiManager.clearUI();
         uiManager.showMessage('すてーじをせんたくしてください');
-        const buttonWidth = 100;
-        const buttonHeight = 50;
-        const spacing = 20;
-        const totalPerRow = 3;
+        const buttonWidth = canvas.width * 0.25;
+        const buttonHeight = canvas.height * 0.1;
+        const spacing = canvas.width * 0.05;
+        const totalPerRow = 2;
         const startX = (canvas.width - (buttonWidth * totalPerRow + spacing * (totalPerRow - 1))) / 2;
-        const startY = canvas.height / 2 - 100;
+        const startY = canvas.height * 0.4;
 
         for (let i = 1; i <= totalStages; i++) {
             const x = startX + ((i - 1) % totalPerRow) * (buttonWidth + spacing);
             const y = startY + Math.floor((i - 1) / totalPerRow) * (buttonHeight + spacing);
-            uiManager.createButton(`すてーじ ${i}`, x, y, () => {
+            uiManager.createButton(`すてーじ ${i}`, () => {
                 currentStage = i;
                 startStage(currentStage);
-            });
+            }, x, y, buttonWidth, buttonHeight);
         }
     }
 
@@ -107,8 +118,8 @@
         uiManager.clearUI();
 
         // プレイヤーとその他のオブジェクトを初期化
-        player = new Player(canvas.width / 2 - 25, canvas.height - 100);
-        goal = new Goal(canvas.width / 2 - 25, 50);
+        player = new Player(canvas.width / 2 - canvas.width * 0.05, canvas.height - canvas.height * 0.15);
+        goal = new Goal(canvas.width / 2 - canvas.width * 0.05, canvas.height * 0.05);
         enemies = [];
         stageManager = new StageManager(stageNumber);
         collisionManager = new CollisionManager();
@@ -116,7 +127,7 @@
         // 敵の生成
         const enemyConfigs = stageManager.getEnemyConfigs();
         enemyConfigs.forEach(config => {
-            enemies.push(new Enemy(config.x, config.y, config.speed, config.direction));
+            enemies.push(new Enemy(config));
         });
     }
 
@@ -125,7 +136,7 @@
         gameState = 'gameOver';
         soundManager.playSound('fail');
         uiManager.showMessage('げーむおーばー');
-        uiManager.createButton('すてーじせんたくにもどる', canvas.width / 2 - 100, canvas.height / 2, () => {
+        uiManager.createButton('すてーじせんたくにもどる', () => {
             gameState = 'stageSelect';
             showStageSelect();
         });
@@ -139,7 +150,7 @@
         if (currentStage === totalStages) {
             allClear();
         } else {
-            uiManager.createButton('すてーじせんたくにもどる', canvas.width / 2 - 100, canvas.height / 2, () => {
+            uiManager.createButton('すてーじせんたくにもどる', () => {
                 gameState = 'stageSelect';
                 showStageSelect();
             });
@@ -180,19 +191,34 @@
     }
 
     // 敵モジュール
-    function Enemy(x, y, speed, direction) {
-        this.x = x;
-        this.y = y;
+    function Enemy(config) {
+        this.x = config.x;
+        this.y = config.y;
         this.width = canvas.width * 0.1;
         this.height = canvas.width * 0.1;
-        this.speed = speed;
-        this.direction = direction;
+        this.speed = config.speed;
+        this.direction = config.direction;
+        this.movementPattern = config.movementPattern;
         this.image = assetManager.getAsset('ice');
 
         this.update = function () {
-            this.x += this.speed * this.direction;
-            if (this.x <= 0 || this.x >= canvas.width - this.width) {
-                this.direction *= -1;
+            // 動きのバリエーション
+            if (this.movementPattern === 'horizontal') {
+                this.x += this.speed * this.direction;
+                if (this.x <= 0 || this.x >= canvas.width - this.width) {
+                    this.direction *= -1;
+                }
+            } else if (this.movementPattern === 'zigzag') {
+                this.x += this.speed * Math.cos(Date.now() / 500);
+                this.y += this.speed * this.direction;
+                if (this.y <= canvas.height * 0.2 || this.y >= canvas.height * 0.8) {
+                    this.direction *= -1;
+                }
+            }
+
+            // 時々スピードアップ
+            if (Math.random() < 0.005) {
+                this.speed *= 1.05;
             }
         };
 
@@ -255,108 +281,123 @@
             // ステージ設計
             switch (stageNumber) {
                 case 1:
-                    // ステージ1：敵1体、速度ゆっくり
+                    // ステージ1：敵1体、速度ゆっくり、横移動
                     enemyConfigs.push({
                         x: 0,
                         y: canvas.height * 0.4,
                         speed: canvas.width * 0.003,
-                        direction: 1
+                        direction: 1,
+                        movementPattern: 'horizontal'
                     });
                     break;
                 case 2:
-                    // ステージ2：敵2体、速度やや速い
+                    // ステージ2：敵2体、速度やや速い、ジグザグ移動
                     enemyConfigs.push({
-                        x: canvas.width - canvas.width * 0.1,
-                        y: canvas.height * 0.3,
+                        x: canvas.width * 0.3,
+                        y: canvas.height * 0.2,
                         speed: canvas.width * 0.004,
-                        direction: -1
+                        direction: 1,
+                        movementPattern: 'zigzag'
                     });
                     enemyConfigs.push({
-                        x: 0,
+                        x: canvas.width * 0.5,
                         y: canvas.height * 0.5,
                         speed: canvas.width * 0.004,
-                        direction: 1
+                        direction: -1,
+                        movementPattern: 'zigzag'
                     });
                     break;
                 case 3:
-                    // ステージ3：敵3体、速度中
+                    // ステージ3：敵3体、速度中、横移動とジグザグ混合
                     enemyConfigs.push({
                         x: 0,
                         y: canvas.height * 0.25,
                         speed: canvas.width * 0.005,
-                        direction: 1
+                        direction: 1,
+                        movementPattern: 'horizontal'
                     });
                     enemyConfigs.push({
-                        x: canvas.width - canvas.width * 0.1,
+                        x: canvas.width * 0.5,
                         y: canvas.height * 0.4,
                         speed: canvas.width * 0.005,
-                        direction: -1
+                        direction: -1,
+                        movementPattern: 'zigzag'
                     });
                     enemyConfigs.push({
                         x: 0,
                         y: canvas.height * 0.55,
                         speed: canvas.width * 0.005,
-                        direction: 1
+                        direction: 1,
+                        movementPattern: 'horizontal'
                     });
                     break;
                 case 4:
-                    // ステージ4：敵4体、速度速い
+                    // ステージ4：敵4体、速度速い、動きに変化
                     enemyConfigs.push({
-                        x: 0,
+                        x: canvas.width * 0.1,
                         y: canvas.height * 0.2,
                         speed: canvas.width * 0.006,
-                        direction: 1
+                        direction: 1,
+                        movementPattern: 'zigzag'
                     });
                     enemyConfigs.push({
-                        x: canvas.width - canvas.width * 0.1,
+                        x: canvas.width * 0.6,
                         y: canvas.height * 0.35,
                         speed: canvas.width * 0.006,
-                        direction: -1
+                        direction: -1,
+                        movementPattern: 'horizontal'
                     });
                     enemyConfigs.push({
-                        x: 0,
+                        x: canvas.width * 0.2,
                         y: canvas.height * 0.5,
                         speed: canvas.width * 0.006,
-                        direction: 1
+                        direction: 1,
+                        movementPattern: 'zigzag'
                     });
                     enemyConfigs.push({
-                        x: canvas.width - canvas.width * 0.1,
+                        x: canvas.width * 0.7,
                         y: canvas.height * 0.65,
                         speed: canvas.width * 0.006,
-                        direction: -1
+                        direction: -1,
+                        movementPattern: 'horizontal'
                     });
                     break;
                 case 5:
-                    // ステージ5：敵5体、速度非常に速い
+                    // ステージ5：敵5体、速度非常に速い、複雑な動き
                     enemyConfigs.push({
                         x: 0,
                         y: canvas.height * 0.15,
                         speed: canvas.width * 0.007,
-                        direction: 1
+                        direction: 1,
+                        movementPattern: 'zigzag'
                     });
                     enemyConfigs.push({
-                        x: canvas.width - canvas.width * 0.1,
+                        x: canvas.width * 0.5,
                         y: canvas.height * 0.3,
                         speed: canvas.width * 0.007,
-                        direction: -1
+                        direction: -1,
+                        movementPattern: 'horizontal'
                     });
                     enemyConfigs.push({
-                        x: 0,
+                        x: canvas.width * 0.2,
                         y: canvas.height * 0.45,
                         speed: canvas.width * 0.007,
-                        direction: 1
+                        direction: 1,
+                        movementPattern: 'zigzag'
                     });
                     enemyConfigs.push({
-                        x: canvas.width - canvas.width * 0.1,
+                        x: canvas.width * 0.6,
                         y: canvas.height * 0.6,
                         speed: canvas.width * 0.007,
-                        direction: -1
+                        direction: -1,
+                        movementPattern: 'horizontal'
                     });
                     enemyConfigs.push({
-                        x: 0,
+                        x: canvas.width * 0.1,
                         y: canvas.height * 0.75,
                         speed: canvas.width * 0.007,
-                        direction: 1
+                        direction: 1,
+                        movementPattern: 'zigzag'
                     });
                     break;
                 default:
@@ -398,9 +439,11 @@
     // UIモジュール
     function UIManager() {
         const uiDiv = document.getElementById('ui');
+        const buttons = [];
 
         this.clearUI = function () {
             uiDiv.innerHTML = '';
+            buttons.length = 0;
         };
 
         this.showTitle = function (text) {
@@ -416,14 +459,27 @@
             uiDiv.appendChild(message);
         };
 
-        this.createButton = function (text, x, y, onClick) {
+        this.createButton = function (text, onClick, x, y, width, height) {
             const button = document.createElement('button');
             button.className = 'button';
-            button.style.left = x + 'px';
-            button.style.top = y + 'px';
             button.innerText = text;
             button.addEventListener('click', onClick);
             uiDiv.appendChild(button);
+            buttons.push({ element: button, x: x, y: y, width: width, height: height });
+            this.updateButtonPosition(button, x, y, width, height);
+        };
+
+        this.updateButtonPosition = function (button, x, y, width, height) {
+            button.style.left = x + 'px';
+            button.style.top = y + 'px';
+            button.style.width = width + 'px';
+            button.style.height = height + 'px';
+        };
+
+        this.updateUIPositions = function () {
+            buttons.forEach(btn => {
+                this.updateButtonPosition(btn.element, btn.x, btn.y, btn.width, btn.height);
+            });
         };
     }
 
@@ -441,6 +497,7 @@
         this.playSound = function (name) {
             const sound = assetManager.getAsset(name);
             sound.currentTime = 0;
+            sound.playbackRate = 1.2; // 再生速度を少し上げる
             sound.play();
         };
     }
