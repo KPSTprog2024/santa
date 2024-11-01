@@ -223,7 +223,7 @@
         this.movementPattern = movementPattern;
         this.image = assetManager.getAsset('ice');
         this.angle = 0; // 円形移動などの角度管理に使用
-        this.radius = canvas.width * 0.1; // 円形移動の半径を拡大
+        this.radius = canvas.width * 0.15; // 円形移動の半径を拡大
 
         // 初期位置の保存（円形移動用）
         this.originX = x;
@@ -512,4 +512,3 @@
     // ゲームの初期化
     init();
 })();
-
