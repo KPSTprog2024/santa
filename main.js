@@ -119,17 +119,21 @@
         gameState = 'playing';
         uiManager.clearUI();
 
-        // プレイヤーとその他のオブジェクトを初期化
+        // プレイヤーとゴールを初期化
         player = new Player(canvas.width / 2 - canvas.width * 0.035, canvas.height - canvas.height * 0.15);
         goal = new Goal(canvas.width / 2 - canvas.width * 0.035, canvas.height * 0.05);
+
+        // サンタの速度を固定
+        player.setSpeed(canvas.height * 0.005);
+
+        // 敵の生成
         enemies = [];
         stageManager = new StageManager(stageNumber);
         collisionManager = new CollisionManager();
 
-        // 敵の生成
         const enemyConfigs = stageManager.getEnemyConfigs();
         enemyConfigs.forEach(config => {
-            enemies.push(new Enemy(config));
+            enemies.push(new Enemy(config.x, config.y, config.speed, config.direction, config.movementPattern));
         });
     }
 
@@ -180,6 +184,10 @@
         this.image = assetManager.getAsset('santa');
         this.isMoving = false;
 
+        this.setSpeed = function (newSpeed) {
+            this.speed = newSpeed;
+        };
+
         this.update = function () {
             if (inputManager.isTapped()) {
                 this.isMoving = true;
@@ -205,18 +213,18 @@
     }
 
     // 敵モジュール
-    function Enemy(config) {
-        this.x = config.x;
-        this.y = config.y;
+    function Enemy(x, y, speed, direction, movementPattern) {
+        this.x = x;
+        this.y = y;
         this.width = canvas.width * 0.07; // サイズを小さく
         this.height = canvas.width * 0.07; // サイズを小さく
-        this.speed = config.speed;
-        this.direction = config.direction;
-        this.movementPattern = config.movementPattern;
+        this.speed = speed;
+        this.direction = direction;
+        this.movementPattern = movementPattern;
         this.image = assetManager.getAsset('ice');
 
         this.update = function () {
-            // 動きのバリエーション
+            // 動きのバリエーションを単純化
             if (this.movementPattern === 'horizontal') {
                 this.x += this.speed * this.direction;
                 if (this.x <= 0 || this.x >= canvas.width - this.width) {
@@ -229,13 +237,13 @@
                 }
             }
 
-            // 時々スピードアップ
+            // 時々スピードアップ（上限を設定）
             if (Math.random() < 0.005) {
-                this.speed = Math.min(this.speed * 1.05, canvas.height * 0.007); // 上限を設定
+                this.speed = Math.min(this.speed * 1.05, canvas.height * 0.006); // 上限を設定（例：canvas.height * 0.006）
             }
 
             // 下限を設定
-            this.speed = Math.max(this.speed, canvas.height * 0.003);
+            this.speed = Math.max(this.speed, canvas.height * 0.003); // 下限を設定（例：canvas.height * 0.003）
         };
 
         this.draw = function (ctx) {
@@ -293,39 +301,29 @@
         // ステージごとの難易度設定
         this.getEnemyConfigs = function () {
             const enemyConfigs = [];
-
-            // ステージ設計
-            // ステージ1: 1体, horizontal
-            // ステージ2: 2体, horizontal
-            // ステージ3: 3体, horizontal
-            // ステージ4: 4体, vertical
-            // ステージ5: 5体, vertical
-            // ステージ6: 6体, horizontal and vertical
-            // ステージ7: 7体, horizontal and vertical
-            // ステージ8: 8体, horizontal and vertical
-            // ステージ9: 9体, horizontal and vertical
-            // ステージ10:10体, horizontal and vertical
+            let baseSpeed = canvas.height * 0.003; // 基本速度
+            let speedIncrement = canvas.height * 0.000333; // ステージごとの速度増加
 
             for (let i = 1; i <= stageNumber; i++) {
+                let speed = baseSpeed + (i - 1) * speedIncrement;
+                speed = Math.min(speed, canvas.height * 0.006); // 上限を200に相当する速度
+
+                let movementPattern;
                 if (i <= 5) {
-                    // 初めの5ステージは主にhorizontalまたはvertical
-                    enemyConfigs.push({
-                        x: Math.random() * (canvas.width - canvas.width * 0.07),
-                        y: canvas.height * 0.3 + Math.random() * (canvas.height * 0.4),
-                        speed: canvas.height * (0.003 + (i - 1) * 0.000333), // ステージごとに速度増加
-                        direction: Math.random() < 0.5 ? 1 : -1,
-                        movementPattern: i <= 3 ? 'horizontal' : 'vertical'
-                    });
+                    // ステージ1-5は主にhorizontalまたはvertical
+                    movementPattern = i <= 3 ? 'horizontal' : 'vertical';
                 } else {
-                    // ステージ6〜10はランダムにhorizontalまたはvertical
-                    enemyConfigs.push({
-                        x: Math.random() * (canvas.width - canvas.width * 0.07),
-                        y: canvas.height * 0.3 + Math.random() * (canvas.height * 0.4),
-                        speed: canvas.height * (0.003 + (i - 1) * 0.000333),
-                        direction: Math.random() < 0.5 ? 1 : -1,
-                        movementPattern: Math.random() < 0.5 ? 'horizontal' : 'vertical'
-                    });
+                    // ステージ6-10はランダムにhorizontalまたはvertical
+                    movementPattern = Math.random() < 0.5 ? 'horizontal' : 'vertical';
                 }
+
+                enemyConfigs.push({
+                    x: Math.random() * (canvas.width - canvas.width * 0.07),
+                    y: canvas.height * 0.3 + Math.random() * (canvas.height * 0.4),
+                    speed: speed,
+                    direction: Math.random() < 0.5 ? 1 : -1,
+                    movementPattern: movementPattern
+                });
             }
 
             return enemyConfigs;
@@ -365,7 +363,7 @@
         };
 
         this.isTouched = function () {
-            return false; // Not used in current implementation
+            return false; // 現在の実装では使用していません
         };
     }
 
