@@ -124,7 +124,7 @@
         goal = new Goal(canvas.width / 2 - canvas.width * 0.035, canvas.height * 0.05);
 
         // サンタの速度を固定
-        player.setSpeed(canvas.height * 0.005);
+        player.setSpeed(canvas.height * 0.005); // 一定速度
 
         // 敵の生成
         enemies = [];
@@ -222,33 +222,64 @@
         this.direction = direction;
         this.movementPattern = movementPattern;
         this.image = assetManager.getAsset('ice');
+        this.angle = 0; // 円形移動などの角度管理に使用
+        this.radius = canvas.width * 0.05; // 円形移動の半径
 
         this.update = function () {
-            // 動きのバリエーションを単純化
-            if (this.movementPattern === 'horizontal') {
-                this.x += this.speed * this.direction;
-                if (this.x <= 0 || this.x >= canvas.width - this.width) {
-                    this.direction *= -1;
-                }
-            } else if (this.movementPattern === 'vertical') {
-                this.y += this.speed * this.direction;
-                if (this.y <= canvas.height * 0.3 || this.y >= canvas.height * 0.7) { // スタート地点近くを避ける
-                    this.direction *= -1;
-                }
+            switch (this.movementPattern) {
+                case 'horizontal':
+                    this.x += this.speed * this.direction;
+                    if (this.x <= 0 || this.x >= canvas.width - this.width) {
+                        this.direction *= -1; // 端に当たったら逆方向
+                    }
+                    break;
+
+                case 'circular':
+                    // 円形に動く（中心点から円を描く）
+                    this.angle += this.speed * 0.1 * this.direction; // 角度を更新
+                    this.x = this.originX + this.radius * Math.cos(this.angle);
+                    this.y = this.originY + this.radius * Math.sin(this.angle);
+                    break;
+
+                case 'triangular':
+                    // 三角形のパスを移動
+                    this.angle += this.speed * 0.1 * this.direction;
+                    this.x = this.originX + this.radius * Math.cos(this.angle);
+                    this.y = this.originY + this.radius * Math.abs(Math.sin(this.angle * 2)); // 三角形の形を作る
+                    break;
+
+                case 'square':
+                    // 四角形のパスに沿って移動
+                    this.angle += this.speed * 0.05 * this.direction; // 低速で移動
+                    let phase = this.angle % 4;
+                    if (phase < 1) {
+                        this.x += this.speed;
+                    } else if (phase < 2) {
+                        this.y += this.speed;
+                    } else if (phase < 3) {
+                        this.x -= this.speed;
+                    } else {
+                        this.y -= this.speed;
+                    }
+                    break;
             }
 
             // 時々スピードアップ（上限を設定）
             if (Math.random() < 0.005) {
-                this.speed = Math.min(this.speed * 1.05, canvas.height * 0.006); // 上限を設定（例：canvas.height * 0.006）
+                this.speed = Math.min(this.speed * 1.05, canvas.height * 0.006); // 上限を設定（ステージ10の速度に相当）
             }
 
             // 下限を設定
-            this.speed = Math.max(this.speed, canvas.height * 0.003); // 下限を設定（例：canvas.height * 0.003）
+            this.speed = Math.max(this.speed, canvas.height * 0.003); // 下限を設定
         };
 
         this.draw = function (ctx) {
             ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         };
+
+        // 初期位置の保存（円形移動用）
+        this.originX = x;
+        this.originY = y;
     }
 
     // ゴールモジュール
@@ -298,31 +329,28 @@
     function StageManager(stageNumber) {
         this.stageNumber = stageNumber;
 
-        // ステージごとの難易度設定
+        // ステージごとの敵設定
         this.getEnemyConfigs = function () {
             const enemyConfigs = [];
-            let baseSpeed = canvas.height * 0.003; // 基本速度
-            let speedIncrement = canvas.height * 0.000333; // ステージごとの速度増加
+            const baseSpeed = canvas.height * 0.003; // 基本速度
+            const speedIncrement = canvas.height * 0.000333; // ステージごとの速度増加
+            const maxSpeed = canvas.height * 0.006; // 最大速度（ステージ10で200に相当）
+
+            const movementPatterns = ['horizontal', 'circular', 'triangular', 'square'];
 
             for (let i = 1; i <= stageNumber; i++) {
                 let speed = baseSpeed + (i - 1) * speedIncrement;
-                speed = Math.min(speed, canvas.height * 0.006); // 上限を200に相当する速度
+                speed = Math.min(speed, maxSpeed); // 上限を設定
 
-                let movementPattern;
-                if (i <= 5) {
-                    // ステージ1-5は主にhorizontalまたはvertical
-                    movementPattern = i <= 3 ? 'horizontal' : 'vertical';
-                } else {
-                    // ステージ6-10はランダムにhorizontalまたはvertical
-                    movementPattern = Math.random() < 0.5 ? 'horizontal' : 'vertical';
-                }
+                // パターンを順に割り当て
+                let pattern = movementPatterns[(i - 1) % movementPatterns.length];
 
                 enemyConfigs.push({
                     x: Math.random() * (canvas.width - canvas.width * 0.07),
-                    y: canvas.height * 0.3 + Math.random() * (canvas.height * 0.4),
+                    y: canvas.height * 0.4 + Math.random() * (canvas.height * 0.2),
                     speed: speed,
                     direction: Math.random() < 0.5 ? 1 : -1,
-                    movementPattern: movementPattern
+                    movementPattern: pattern
                 });
             }
 
