@@ -223,7 +223,11 @@
         this.movementPattern = movementPattern;
         this.image = assetManager.getAsset('ice');
         this.angle = 0; // 円形移動などの角度管理に使用
-        this.radius = canvas.width * 0.05; // 円形移動の半径
+        this.radius = canvas.width * 0.1; // 円形移動の半径を拡大
+
+        // 初期位置の保存（円形移動用）
+        this.originX = x;
+        this.originY = y;
 
         this.update = function () {
             switch (this.movementPattern) {
@@ -251,12 +255,12 @@
                 case 'square':
                     // 四角形のパスに沿って移動
                     this.angle += this.speed * 0.05 * this.direction; // 低速で移動
-                    let phase = this.angle % 4;
-                    if (phase < 1) {
+                    let phase = Math.floor(this.angle) % 4;
+                    if (phase === 0) {
                         this.x += this.speed;
-                    } else if (phase < 2) {
+                    } else if (phase === 1) {
                         this.y += this.speed;
-                    } else if (phase < 3) {
+                    } else if (phase === 2) {
                         this.x -= this.speed;
                     } else {
                         this.y -= this.speed;
@@ -264,22 +268,12 @@
                     break;
             }
 
-            // 時々スピードアップ（上限を設定）
-            if (Math.random() < 0.005) {
-                this.speed = Math.min(this.speed * 1.05, canvas.height * 0.006); // 上限を設定（ステージ10の速度に相当）
-            }
-
-            // 下限を設定
-            this.speed = Math.max(this.speed, canvas.height * 0.003); // 下限を設定
+            // 累積加速を防止するため、速度増加ロジックを削除
         };
 
         this.draw = function (ctx) {
             ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         };
-
-        // 初期位置の保存（円形移動用）
-        this.originX = x;
-        this.originY = y;
     }
 
     // ゴールモジュール
@@ -345,8 +339,20 @@
                 // パターンを順に割り当て
                 let pattern = movementPatterns[(i - 1) % movementPatterns.length];
 
+                // サンタの直線進路をふさがないように、敵の移動パターンを配置
+                // サンタは中央を通るので、敵は中央から少し離れた位置から移動させる
+
+                // 中央から離れた位置に敵を配置
+                let spawnSide = Math.random() < 0.5 ? 'left' : 'right';
+                let spawnX;
+                if (spawnSide === 'left') {
+                    spawnX = Math.random() * (canvas.width * 0.3);
+                } else {
+                    spawnX = canvas.width - Math.random() * (canvas.width * 0.3) - canvas.width * 0.07;
+                }
+
                 enemyConfigs.push({
-                    x: Math.random() * (canvas.width - canvas.width * 0.07),
+                    x: spawnX,
                     y: canvas.height * 0.4 + Math.random() * (canvas.height * 0.2),
                     speed: speed,
                     direction: Math.random() < 0.5 ? 1 : -1,
