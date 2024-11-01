@@ -4,6 +4,22 @@
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
+    // ゲームの状態
+    let gameState = 'mainMenu'; // 'mainMenu', 'stageSelect', 'playing', 'gameOver', 'stageClear', 'allClear'
+    let currentStage = 1;
+    const totalStages = 5;
+
+    // モジュールの初期化（UIManagerを先に初期化）
+    const assetManager = new AssetManager();
+    const soundManager = new SoundManager();
+    const inputManager = new InputManager();
+    const uiManager = new UIManager(); // UIManagerを先に初期化
+    let stageManager;
+    let player;
+    let enemies = [];
+    let goal;
+    let collisionManager;
+
     // 画面サイズの調整（アスペクト比の維持）
     function resizeCanvas() {
         let aspectRatio = 9 / 16; // 基準となるアスペクト比（縦長）
@@ -20,24 +36,10 @@
         // UIの位置を再調整
         uiManager.updateUIPositions();
     }
+
+    // resizeCanvasを先に定義した後、イベントリスナーと初期呼び出し
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
-
-    // ゲームの状態
-    let gameState = 'mainMenu'; // 'mainMenu', 'stageSelect', 'playing', 'gameOver', 'stageClear', 'allClear'
-    let currentStage = 1;
-    const totalStages = 5;
-
-    // モジュールの初期化
-    const assetManager = new AssetManager();
-    const soundManager = new SoundManager();
-    const inputManager = new InputManager();
-    const uiManager = new UIManager();
-    let stageManager;
-    let player;
-    let enemies = [];
-    let goal;
-    let collisionManager;
 
     // ゲーム開始
     function init() {
