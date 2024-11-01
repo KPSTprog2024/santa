@@ -23,13 +23,19 @@ body {
 .button {
     position: absolute;
     pointer-events: all;
-    padding: 10px 20px;
+    padding: 1vw 2vw;
     background-color: rgba(255, 255, 255, 0.8);
     border: none;
-    border-radius: 10px;
+    border-radius: 1vw;
     cursor: pointer;
-    font-size: 2vw;
+    font-size: 4vw;
     font-family: 'Arial', sans-serif;
+    transition: transform 0.2s;
+    color: #333;
+}
+
+.button:hover {
+    transform: scale(1.1);
 }
 
 #message {
@@ -38,15 +44,17 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     color: #fff;
-    font-size: 4vw;
+    font-size: 6vw;
     text-align: center;
     font-family: 'Arial', sans-serif;
+    text-shadow: 2px 2px 4px #000;
 }
 
 h1 {
     color: #fff;
     text-align: center;
-    font-size: 6vw;
-    margin-top: 20px;
+    font-size: 8vw;
+    margin-top: 5vh;
     font-family: 'Arial', sans-serif;
+    text-shadow: 2px 2px 4px #000;
 }
