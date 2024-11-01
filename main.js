@@ -20,17 +20,14 @@ const stagesConfig = {
       "stageNumber": 3,
       "iceBlocks": [
         { "direction": "left", "speed": 140 },
-        { "direction": "right", "speed": 140 },
-        { "direction": "up", "speed": 100 }
+        { "direction": "right", "speed": 140 }
       ]
     },
     {
       "stageNumber": 4,
       "iceBlocks": [
         { "direction": "left", "speed": 160 },
-        { "direction": "right", "speed": 160 },
-        { "direction": "up", "speed": 120 },
-        { "direction": "down", "speed": 120 }
+        { "direction": "right", "speed": 160 }
       ]
     },
     {
@@ -38,8 +35,6 @@ const stagesConfig = {
       "iceBlocks": [
         { "direction": "left", "speed": 180 },
         { "direction": "right", "speed": 180 },
-        { "direction": "up", "speed": 140 },
-        { "direction": "down", "speed": 140 },
         { "direction": "left", "speed": 200 }
       ]
     },
@@ -48,8 +43,6 @@ const stagesConfig = {
       "iceBlocks": [
         { "direction": "left", "speed": 220 },
         { "direction": "right", "speed": 220 },
-        { "direction": "up", "speed": 160 },
-        { "direction": "down", "speed": 160 },
         { "direction": "left", "speed": 240 },
         { "direction": "right", "speed": 240 }
       ]
@@ -59,144 +52,117 @@ const stagesConfig = {
       "iceBlocks": [
         { "direction": "left", "speed": 260 },
         { "direction": "right", "speed": 260 },
-        { "direction": "up", "speed": 180 },
-        { "direction": "down", "speed": 180 },
         { "direction": "left", "speed": 280 },
         { "direction": "right", "speed": 280 },
-        { "direction": "up", "speed": 200 }
+        { "direction": "left", "speed": 300 }
       ]
     },
     {
       "stageNumber": 8,
       "iceBlocks": [
-        { "direction": "left", "speed": 300 },
-        { "direction": "right", "speed": 300 },
-        { "direction": "up", "speed": 220 },
-        { "direction": "down", "speed": 220 },
         { "direction": "left", "speed": 320 },
         { "direction": "right", "speed": 320 },
-        { "direction": "up", "speed": 240 },
-        { "direction": "down", "speed": 240 }
+        { "direction": "left", "speed": 340 },
+        { "direction": "right", "speed": 340 },
+        { "direction": "left", "speed": 360 },
+        { "direction": "right", "speed": 360 }
       ]
     },
     {
       "stageNumber": 9,
       "iceBlocks": [
-        { "direction": "left", "speed": 340 },
-        { "direction": "right", "speed": 340 },
-        { "direction": "up", "speed": 260 },
-        { "direction": "down", "speed": 260 },
-        { "direction": "left", "speed": 360 },
-        { "direction": "right", "speed": 360 },
-        { "direction": "up", "speed": 280 },
-        { "direction": "down", "speed": 280 },
-        { "direction": "left", "speed": 380 }
+        { "direction": "left", "speed": 380 },
+        { "direction": "right", "speed": 380 },
+        { "direction": "left", "speed": 400 },
+        { "direction": "right", "speed": 400 },
+        { "direction": "left", "speed": 420 },
+        { "direction": "right", "speed": 420 },
+        { "direction": "left", "speed": 440 }
       ]
     },
     {
       "stageNumber": 10,
       "iceBlocks": [
-        { "direction": "left", "speed": 400 },
-        { "direction": "right", "speed": 400 },
-        { "direction": "up", "speed": 300 },
-        { "direction": "down", "speed": 300 },
-        { "direction": "left", "speed": 420 },
-        { "direction": "right", "speed": 420 },
-        { "direction": "up", "speed": 320 },
-        { "direction": "down", "speed": 320 },
-        { "direction": "left", "speed": 440 },
-        { "direction": "right", "speed": 440 }
+        { "direction": "left", "speed": 460 },
+        { "direction": "right", "speed": 460 },
+        { "direction": "left", "speed": 480 },
+        { "direction": "right", "speed": 480 },
+        { "direction": "left", "speed": 500 },
+        { "direction": "right", "speed": 500 }
       ]
     },
     {
       "stageNumber": 11,
       "iceBlocks": [
-        { "direction": "left", "speed": 460 },
-        { "direction": "right", "speed": 460 },
-        { "direction": "up", "speed": 340 },
-        { "direction": "down", "speed": 340 },
-        { "direction": "left", "speed": 480 },
-        { "direction": "right", "speed": 480 },
-        { "direction": "up", "speed": 360 },
-        { "direction": "down", "speed": 360 },
-        { "direction": "left", "speed": 500 },
-        { "direction": "right", "speed": 500 },
-        { "direction": "up", "speed": 380 }
+        { "direction": "left", "speed": 520 },
+        { "direction": "right", "speed": 520 },
+        { "direction": "left", "speed": 540 },
+        { "direction": "right", "speed": 540 },
+        { "direction": "left", "speed": 560 },
+        { "direction": "right", "speed": 560 },
+        { "direction": "left", "speed": 580 },
+        { "direction": "right", "speed": 580 },
+        { "direction": "left", "speed": 600 }
       ]
     },
     {
       "stageNumber": 12,
       "iceBlocks": [
-        { "direction": "left", "speed": 520 },
-        { "direction": "right", "speed": 520 },
-        { "direction": "up", "speed": 400 },
-        { "direction": "down", "speed": 400 },
-        { "direction": "left", "speed": 540 },
-        { "direction": "right", "speed": 540 },
-        { "direction": "up", "speed": 420 },
-        { "direction": "down", "speed": 420 },
-        { "direction": "left", "speed": 560 },
-        { "direction": "right", "speed": 560 },
-        { "direction": "up", "speed": 440 },
-        { "direction": "down", "speed": 440 }
-      ]
-    },
-    {
-      "stageNumber": 13,
-      "iceBlocks": [
-        { "direction": "left", "speed": 580 },
-        { "direction": "right", "speed": 580 },
-        { "direction": "up", "speed": 460 },
-        { "direction": "down", "speed": 460 },
-        { "direction": "left", "speed": 600 },
-        { "direction": "right", "speed": 600 },
-        { "direction": "up", "speed": 480 },
-        { "direction": "down", "speed": 480 },
         { "direction": "left", "speed": 620 },
         { "direction": "right", "speed": 620 },
-        { "direction": "up", "speed": 500 },
-        { "direction": "down", "speed": 500 },
-        { "direction": "left", "speed": 640 }
-      ]
-    },
-    {
-      "stageNumber": 14,
-      "iceBlocks": [
+        { "direction": "left", "speed": 640 },
+        { "direction": "right", "speed": 640 },
         { "direction": "left", "speed": 660 },
         { "direction": "right", "speed": 660 },
-        { "direction": "up", "speed": 520 },
-        { "direction": "down", "speed": 520 },
         { "direction": "left", "speed": 680 },
         { "direction": "right", "speed": 680 },
-        { "direction": "up", "speed": 540 },
-        { "direction": "down", "speed": 540 },
         { "direction": "left", "speed": 700 },
         { "direction": "right", "speed": 700 },
-        { "direction": "up", "speed": 560 },
-        { "direction": "down", "speed": 560 },
         { "direction": "left", "speed": 720 },
         { "direction": "right", "speed": 720 }
       ]
     },
     {
-      "stageNumber": 15,
+      "stageNumber": 13,
       "iceBlocks": [
         { "direction": "left", "speed": 740 },
         { "direction": "right", "speed": 740 },
-        { "direction": "up", "speed": 580 },
-        { "direction": "down", "speed": 580 },
         { "direction": "left", "speed": 760 },
         { "direction": "right", "speed": 760 },
-        { "direction": "up", "speed": 600 },
-        { "direction": "down", "speed": 600 },
         { "direction": "left", "speed": 780 },
         { "direction": "right", "speed": 780 },
-        { "direction": "up", "speed": 620 },
-        { "direction": "down", "speed": 620 },
         { "direction": "left", "speed": 800 },
         { "direction": "right", "speed": 800 },
-        { "direction": "up", "speed": 640 },
-        { "direction": "down", "speed": 640 }
+        { "direction": "left", "speed": 820 },
+        { "direction": "right", "speed": 820 }
+      ]
+    },
+    {
+      "stageNumber": 14,
+      "iceBlocks": [
+        { "direction": "left", "speed": 840 },
+        { "direction": "right", "speed": 840 },
+        { "direction": "left", "speed": 860 },
+        { "direction": "right", "speed": 860 },
+        { "direction": "left", "speed": 880 },
+        { "direction": "right", "speed": 880 },
+        { "direction": "left", "speed": 900 },
+        { "direction": "right", "speed": 900 }
+      ]
+    },
+    {
+      "stageNumber": 15,
+      "iceBlocks": [
+        { "direction": "left", "speed": 920 },
+        { "direction": "right", "speed": 920 },
+        { "direction": "left", "speed": 940 },
+        { "direction": "right", "speed": 940 },
+        { "direction": "left", "speed": 960 },
+        { "direction": "right", "speed": 960 },
+        { "direction": "left", "speed": 980 },
+        { "direction": "right", "speed": 980 },
+        { "direction": "left", "speed": 1000 },
+        { "direction": "right", "speed": 1000 }
       ]
     }
   ]
@@ -327,11 +293,8 @@ class IceBlock extends Phaser.Physics.Arcade.Sprite {
             return { x: -this.speed, y: 0 };
         } else if (this.direction === 'right') {
             return { x: this.speed, y: 0 };
-        } else if (this.direction === 'up') {
-            return { x: 0, y: -this.speed };
-        } else if (this.direction === 'down') {
-            return { x: 0, y: this.speed };
         } else {
+            // 'up' や 'down' は無視する
             return { x: 0, y: 0 };
         }
     }
@@ -366,16 +329,16 @@ class UIScene extends Phaser.Scene {
         // メッセージテキストをコンテナに追加
         this.messageContainer.add(this.messageText);
 
-        // 「つぎのすてーじへ」ボタンの初期化
-        this.nextStageButton = this.add.text(0, 0, 'つぎのすてーじへ', {
+        // 「すてーじせんたくにもどる」ボタンの初期化
+        this.stageSelectButton = this.add.text(0, 0, 'すてーじせんたくにもどる', {
             fontSize: '22px',
             fill: '#00ff00',
             backgroundColor: '#000000',
             padding: { x: 20, y: 10 },
             align: 'center'
         }).setOrigin(0.5).setInteractive();
-        this.nextStageButton.setVisible(false);
-        this.messageContainer.add(this.nextStageButton);
+        this.stageSelectButton.setVisible(false);
+        this.messageContainer.add(this.stageSelectButton);
 
         // 「もういっかいはこぶ！」ボタンの初期化
         this.retryButton = this.add.text(0, 40, 'もういっかいはこぶ！', {
@@ -388,41 +351,19 @@ class UIScene extends Phaser.Scene {
         this.retryButton.setVisible(false);
         this.messageContainer.add(this.retryButton);
 
-        // 「さいしょにもどる」ボタンの初期化
-        this.menuButton = this.add.text(0, 80, 'さいしょにもどる', {
-            fontSize: '22px',
-            fill: '#00ff00',
-            backgroundColor: '#000000',
-            padding: { x: 20, y: 10 },
-            align: 'center'
-        }).setOrigin(0.5).setInteractive();
-        this.menuButton.setVisible(false);
-        this.messageContainer.add(this.menuButton);
+        // 「さいしょにもどる」ボタンの初期化（削除）
 
         // ボタンのイベント設定
-        this.nextStageButton.on('pointerdown', () => {
+        this.stageSelectButton.on('pointerdown', () => {
             this.hideMessages();
-            const nextStage = this.registry.get('currentStage') + 1;
-            if (nextStage > 15) {
-                // 全ステージクリア
-                this.showFinalMessage();
-            } else {
-                this.registry.set('currentStage', nextStage);
-                this.scene.stop('MainScene');
-                this.scene.start('MainScene', { stageNumber: nextStage });
-            }
+            this.scene.stop('MainScene');
+            this.scene.start('StageSelectScene');
         });
 
         this.retryButton.on('pointerdown', () => {
             this.hideMessages();
             this.scene.stop('MainScene');
             this.scene.start('MainScene', { stageNumber: this.registry.get('currentStage') });
-        });
-
-        this.menuButton.on('pointerdown', () => {
-            this.hideMessages();
-            this.scene.stop('MainScene');
-            this.scene.start('MenuScene');
         });
 
         // フラグの初期化
@@ -436,7 +377,7 @@ class UIScene extends Phaser.Scene {
 
         const message = getRandomMessage('clear');
         this.messageText.setText(message);
-        this.nextStageButton.setVisible(true);
+        this.stageSelectButton.setVisible(true);
         this.messageContainer.setVisible(true);
     }
 
@@ -448,7 +389,6 @@ class UIScene extends Phaser.Scene {
         const message = getRandomMessage('fail');
         this.messageText.setText(message);
         this.retryButton.setVisible(true);
-        this.menuButton.setVisible(true);
         this.messageContainer.setVisible(true);
     }
 
@@ -468,9 +408,8 @@ class UIScene extends Phaser.Scene {
 
     hideMessages() {
         this.messageContainer.setVisible(false);
-        this.nextStageButton.setVisible(false);
+        this.stageSelectButton.setVisible(false);
         this.retryButton.setVisible(false);
-        this.menuButton.setVisible(false);
     }
 
     showFinalMessage() {
@@ -480,15 +419,8 @@ class UIScene extends Phaser.Scene {
 
         const message = "すべてのステージをクリアしました！めりーくりすます！";
         this.messageText.setText(message);
-        this.nextStageButton.setText('メニューに戻る').setVisible(true);
+        this.stageSelectButton.setText('すてーじせんたくにもどる').setVisible(true);
         this.messageContainer.setVisible(true);
-
-        // イベントリスナーを再設定
-        this.nextStageButton.off('pointerdown');
-        this.nextStageButton.on('pointerdown', () => {
-            this.hideMessages();
-            this.scene.start('MenuScene');
-        });
     }
 }
 
@@ -572,24 +504,8 @@ class MenuScene extends Phaser.Scene {
             this.scene.start('StageSelectScene');
         });
 
-        // 設定ボタン（将来的な機能追加用）
-        const settingsButton = this.add.text(this.cameras.main.centerX, 500, 'せってい', {
-            fontSize: '32px',
-            fill: '#00ff00',
-            backgroundColor: '#000000',
-            padding: { x: 20, y: 10 },
-            align: 'center'
-        }).setOrigin(0.5).setInteractive();
-
-        settingsButton.on('pointerdown', () => {
-            if (!this.settingsMessage) {
-                this.settingsMessage = this.add.text(this.cameras.main.centerX, 600, '設定画面はまだです！', {
-                    fontSize: '24px',
-                    fill: '#ff0000',
-                    align: 'center'
-                }).setOrigin(0.5);
-            }
-        });
+        // 設定ボタン（削除）
+        // 設定ボタンのコードを削除しました
     }
 }
 
@@ -699,6 +615,7 @@ class MainScene extends Phaser.Scene {
             } else if (blockConfig.direction === 'right') {
                 x = 50;
             } else {
+                // 'up' や 'down' は無視する
                 x = Phaser.Math.Between(100, this.cameras.main.width - 100);
             }
 
