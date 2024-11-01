@@ -90,7 +90,7 @@
         uiManager.createButton('すたーと', () => {
             gameState = 'stageSelect';
             showStageSelect();
-        }, canvas.width / 2 - canvas.width * 0.075, canvas.height / 2, canvas.width * 0.15, canvas.height * 0.1);
+        });
     }
 
     // ステージ選択画面の表示
@@ -105,12 +105,11 @@
         const startY = canvas.height * 0.4;
 
         for (let i = 1; i <= totalStages; i++) {
-            const x = startX + ((i - 1) % totalPerRow) * (buttonWidth + spacing);
-            const y = startY + Math.floor((i - 1) / totalPerRow) * (buttonHeight + spacing);
+            // フレックスボックスを使用するため、xとyは不要
             uiManager.createButton(`すてーじ ${i}`, () => {
                 currentStage = i;
                 startStage(currentStage);
-            }, x, y, buttonWidth, buttonHeight);
+            }, 'primary');
         }
     }
 
@@ -145,7 +144,7 @@
         uiManager.createButton('すてーじせんたくにもどる', () => {
             gameState = 'stageSelect';
             showStageSelect();
-        }, canvas.width / 2 - canvas.width * 0.15, canvas.height / 2, canvas.width * 0.3, canvas.height * 0.1);
+        }, 'secondary');
     }
 
     // ステージクリア処理
@@ -159,7 +158,7 @@
             uiManager.createButton('すてーじせんたくにもどる', () => {
                 gameState = 'stageSelect';
                 showStageSelect();
-            }, canvas.width / 2 - canvas.width * 0.15, canvas.height / 2, canvas.width * 0.3, canvas.height * 0.1);
+            }, 'secondary');
         }
     }
 
@@ -171,7 +170,7 @@
         uiManager.createButton('はじめににもどる', () => {
             gameState = 'mainMenu';
             showMainMenu();
-        }, canvas.width / 2 - canvas.width * 0.15, canvas.height / 2, canvas.width * 0.3, canvas.height * 0.1);
+        }, 'secondary');
     }
 
     // プレイヤーモジュール
@@ -424,27 +423,27 @@
             uiDiv.appendChild(message);
         };
 
-        this.createButton = function (text, onClick, x, y, width, height) {
+        /**
+         * createButton メソッドを修正
+         * @param {string} text - ボタンのテキスト
+         * @param {function} onClick - ボタンクリック時のコールバック関数
+         * @param {string} type - ボタンの種類 ('primary' または 'secondary')
+         */
+        this.createButton = function (text, onClick, type = 'primary') {
             const button = document.createElement('button');
             button.className = 'button';
+            if (type === 'secondary') {
+                button.classList.add('button-secondary');
+            }
             button.innerText = text;
             button.addEventListener('click', onClick);
             uiDiv.appendChild(button);
-            buttons.push({ element: button, x: x, y: y, width: width, height: height });
-            this.updateButtonPosition(button, x, y, width, height);
-        };
-
-        this.updateButtonPosition = function (button, x, y, width, height) {
-            button.style.left = x + 'px';
-            button.style.top = y + 'px';
-            button.style.width = width + 'px';
-            button.style.height = height + 'px';
+            buttons.push(button);
         };
 
         this.updateUIPositions = function () {
-            buttons.forEach(btn => {
-                this.updateButtonPosition(btn.element, btn.x, btn.y, btn.width, btn.height);
-            });
+            // フレックスボックスを使用しているため、特に位置を更新する必要はありません
+            // このメソッドは空のままにしておきます
         };
     }
 
