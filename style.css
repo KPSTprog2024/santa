@@ -24,18 +24,29 @@ body {
     position: absolute;
     pointer-events: all;
     padding: 10px 20px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.8);
     border: none;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 2vw;
+    font-family: 'Arial', sans-serif;
 }
 
 #message {
     position: absolute;
-    top: 40%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #fff;
-    font-size: 24px;
+    font-size: 4vw;
     text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+    font-size: 6vw;
+    margin-top: 20px;
+    font-family: 'Arial', sans-serif;
 }
