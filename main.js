@@ -6,163 +6,226 @@ const stagesConfig = {
     {
       "stageNumber": 1,
       "iceBlocks": [
-        { "direction": "left", "speed": 100 }
+        { "direction": "left", "speed": 150 },
+        { "direction": "right", "speed": 150 },
+        { "direction": "left", "speed": 150 }
       ]
     },
     {
       "stageNumber": 2,
       "iceBlocks": [
-        { "direction": "left", "speed": 120 },
-        { "direction": "right", "speed": 120 }
+        { "direction": "left", "speed": 153 },
+        { "direction": "right", "speed": 153 },
+        { "direction": "left", "speed": 153 },
+        { "direction": "right", "speed": 153 }
       ]
     },
     {
       "stageNumber": 3,
       "iceBlocks": [
-        { "direction": "left", "speed": 140 },
-        { "direction": "right", "speed": 140 }
+        { "direction": "left", "speed": 156 },
+        { "direction": "right", "speed": 156 },
+        { "direction": "left", "speed": 156 },
+        { "direction": "right", "speed": 156 },
+        { "direction": "left", "speed": 156 }
       ]
     },
     {
       "stageNumber": 4,
       "iceBlocks": [
-        { "direction": "left", "speed": 160 },
-        { "direction": "right", "speed": 160 }
+        { "direction": "left", "speed": 159 },
+        { "direction": "right", "speed": 159 },
+        { "direction": "left", "speed": 159 },
+        { "direction": "right", "speed": 159 },
+        { "direction": "left", "speed": 159 },
+        { "direction": "right", "speed": 159 }
       ]
     },
     {
       "stageNumber": 5,
       "iceBlocks": [
-        { "direction": "left", "speed": 180 },
-        { "direction": "right", "speed": 180 },
-        { "direction": "left", "speed": 200 }
+        { "direction": "left", "speed": 162 },
+        { "direction": "right", "speed": 162 },
+        { "direction": "left", "speed": 162 },
+        { "direction": "right", "speed": 162 },
+        { "direction": "left", "speed": 162 },
+        { "direction": "right", "speed": 162 },
+        { "direction": "left", "speed": 162 }
       ]
     },
     {
       "stageNumber": 6,
       "iceBlocks": [
-        { "direction": "left", "speed": 220 },
-        { "direction": "right", "speed": 220 },
-        { "direction": "left", "speed": 240 },
-        { "direction": "right", "speed": 240 }
+        { "direction": "left", "speed": 165 },
+        { "direction": "right", "speed": 165 },
+        { "direction": "left", "speed": 165 },
+        { "direction": "right", "speed": 165 },
+        { "direction": "left", "speed": 165 },
+        { "direction": "right", "speed": 165 },
+        { "direction": "left", "speed": 165 },
+        { "direction": "right", "speed": 165 }
       ]
     },
     {
       "stageNumber": 7,
       "iceBlocks": [
-        { "direction": "left", "speed": 260 },
-        { "direction": "right", "speed": 260 },
-        { "direction": "left", "speed": 280 },
-        { "direction": "right", "speed": 280 },
-        { "direction": "left", "speed": 300 }
+        { "direction": "left", "speed": 168 },
+        { "direction": "right", "speed": 168 },
+        { "direction": "left", "speed": 168 },
+        { "direction": "right", "speed": 168 },
+        { "direction": "left", "speed": 168 },
+        { "direction": "right", "speed": 168 },
+        { "direction": "left", "speed": 168 },
+        { "direction": "right", "speed": 168 },
+        { "direction": "left", "speed": 168 }
       ]
     },
     {
       "stageNumber": 8,
       "iceBlocks": [
-        { "direction": "left", "speed": 320 },
-        { "direction": "right", "speed": 320 },
-        { "direction": "left", "speed": 340 },
-        { "direction": "right", "speed": 340 },
-        { "direction": "left", "speed": 360 },
-        { "direction": "right", "speed": 360 }
+        { "direction": "left", "speed": 171 },
+        { "direction": "right", "speed": 171 },
+        { "direction": "left", "speed": 171 },
+        { "direction": "right", "speed": 171 },
+        { "direction": "left", "speed": 171 },
+        { "direction": "right", "speed": 171 },
+        { "direction": "left", "speed": 171 },
+        { "direction": "right", "speed": 171 },
+        { "direction": "left", "speed": 171 },
+        { "direction": "right", "speed": 171 }
       ]
     },
     {
       "stageNumber": 9,
       "iceBlocks": [
-        { "direction": "left", "speed": 380 },
-        { "direction": "right", "speed": 380 },
-        { "direction": "left", "speed": 400 },
-        { "direction": "right", "speed": 400 },
-        { "direction": "left", "speed": 420 },
-        { "direction": "right", "speed": 420 },
-        { "direction": "left", "speed": 440 }
+        { "direction": "left", "speed": 174 },
+        { "direction": "right", "speed": 174 },
+        { "direction": "left", "speed": 174 },
+        { "direction": "right", "speed": 174 },
+        { "direction": "left", "speed": 174 },
+        { "direction": "right", "speed": 174 },
+        { "direction": "left", "speed": 174 },
+        { "direction": "right", "speed": 174 },
+        { "direction": "left", "speed": 174 },
+        { "direction": "right", "speed": 174 },
+        { "direction": "left", "speed": 174 }
       ]
     },
     {
       "stageNumber": 10,
       "iceBlocks": [
-        { "direction": "left", "speed": 460 },
-        { "direction": "right", "speed": 460 },
-        { "direction": "left", "speed": 480 },
-        { "direction": "right", "speed": 480 },
-        { "direction": "left", "speed": 500 },
-        { "direction": "right", "speed": 500 }
+        { "direction": "left", "speed": 177 },
+        { "direction": "right", "speed": 177 },
+        { "direction": "left", "speed": 177 },
+        { "direction": "right", "speed": 177 },
+        { "direction": "left", "speed": 177 },
+        { "direction": "right", "speed": 177 },
+        { "direction": "left", "speed": 177 },
+        { "direction": "right", "speed": 177 },
+        { "direction": "left", "speed": 177 },
+        { "direction": "right", "speed": 177 },
+        { "direction": "left", "speed": 177 },
+        { "direction": "right", "speed": 177 }
       ]
     },
     {
       "stageNumber": 11,
       "iceBlocks": [
-        { "direction": "left", "speed": 520 },
-        { "direction": "right", "speed": 520 },
-        { "direction": "left", "speed": 540 },
-        { "direction": "right", "speed": 540 },
-        { "direction": "left", "speed": 560 },
-        { "direction": "right", "speed": 560 },
-        { "direction": "left", "speed": 580 },
-        { "direction": "right", "speed": 580 },
-        { "direction": "left", "speed": 600 }
+        { "direction": "left", "speed": 180 },
+        { "direction": "right", "speed": 180 },
+        { "direction": "left", "speed": 180 },
+        { "direction": "right", "speed": 180 },
+        { "direction": "left", "speed": 180 },
+        { "direction": "right", "speed": 180 },
+        { "direction": "left", "speed": 180 },
+        { "direction": "right", "speed": 180 },
+        { "direction": "left", "speed": 180 },
+        { "direction": "right", "speed": 180 },
+        { "direction": "left", "speed": 180 },
+        { "direction": "right", "speed": 180 },
+        { "direction": "left", "speed": 180 }
       ]
     },
     {
       "stageNumber": 12,
       "iceBlocks": [
-        { "direction": "left", "speed": 620 },
-        { "direction": "right", "speed": 620 },
-        { "direction": "left", "speed": 640 },
-        { "direction": "right", "speed": 640 },
-        { "direction": "left", "speed": 660 },
-        { "direction": "right", "speed": 660 },
-        { "direction": "left", "speed": 680 },
-        { "direction": "right", "speed": 680 },
-        { "direction": "left", "speed": 700 },
-        { "direction": "right", "speed": 700 },
-        { "direction": "left", "speed": 720 },
-        { "direction": "right", "speed": 720 }
+        { "direction": "left", "speed": 183 },
+        { "direction": "right", "speed": 183 },
+        { "direction": "left", "speed": 183 },
+        { "direction": "right", "speed": 183 },
+        { "direction": "left", "speed": 183 },
+        { "direction": "right", "speed": 183 },
+        { "direction": "left", "speed": 183 },
+        { "direction": "right", "speed": 183 },
+        { "direction": "left", "speed": 183 },
+        { "direction": "right", "speed": 183 },
+        { "direction": "left", "speed": 183 },
+        { "direction": "right", "speed": 183 },
+        { "direction": "left", "speed": 183 },
+        { "direction": "right", "speed": 183 }
       ]
     },
     {
       "stageNumber": 13,
       "iceBlocks": [
-        { "direction": "left", "speed": 740 },
-        { "direction": "right", "speed": 740 },
-        { "direction": "left", "speed": 760 },
-        { "direction": "right", "speed": 760 },
-        { "direction": "left", "speed": 780 },
-        { "direction": "right", "speed": 780 },
-        { "direction": "left", "speed": 800 },
-        { "direction": "right", "speed": 800 },
-        { "direction": "left", "speed": 820 },
-        { "direction": "right", "speed": 820 }
+        { "direction": "left", "speed": 186 },
+        { "direction": "right", "speed": 186 },
+        { "direction": "left", "speed": 186 },
+        { "direction": "right", "speed": 186 },
+        { "direction": "left", "speed": 186 },
+        { "direction": "right", "speed": 186 },
+        { "direction": "left", "speed": 186 },
+        { "direction": "right", "speed": 186 },
+        { "direction": "left", "speed": 186 },
+        { "direction": "right", "speed": 186 },
+        { "direction": "left", "speed": 186 },
+        { "direction": "right", "speed": 186 },
+        { "direction": "left", "speed": 186 },
+        { "direction": "right", "speed": 186 },
+        { "direction": "left", "speed": 186 }
       ]
     },
     {
       "stageNumber": 14,
       "iceBlocks": [
-        { "direction": "left", "speed": 840 },
-        { "direction": "right", "speed": 840 },
-        { "direction": "left", "speed": 860 },
-        { "direction": "right", "speed": 860 },
-        { "direction": "left", "speed": 880 },
-        { "direction": "right", "speed": 880 },
-        { "direction": "left", "speed": 900 },
-        { "direction": "right", "speed": 900 }
+        { "direction": "left", "speed": 189 },
+        { "direction": "right", "speed": 189 },
+        { "direction": "left", "speed": 189 },
+        { "direction": "right", "speed": 189 },
+        { "direction": "left", "speed": 189 },
+        { "direction": "right", "speed": 189 },
+        { "direction": "left", "speed": 189 },
+        { "direction": "right", "speed": 189 },
+        { "direction": "left", "speed": 189 },
+        { "direction": "right", "speed": 189 },
+        { "direction": "left", "speed": 189 },
+        { "direction": "right", "speed": 189 },
+        { "direction": "left", "speed": 189 },
+        { "direction": "right", "speed": 189 },
+        { "direction": "left", "speed": 189 },
+        { "direction": "right", "speed": 189 }
       ]
     },
     {
       "stageNumber": 15,
       "iceBlocks": [
-        { "direction": "left", "speed": 920 },
-        { "direction": "right", "speed": 920 },
-        { "direction": "left", "speed": 940 },
-        { "direction": "right", "speed": 940 },
-        { "direction": "left", "speed": 960 },
-        { "direction": "right", "speed": 960 },
-        { "direction": "left", "speed": 980 },
-        { "direction": "right", "speed": 980 },
-        { "direction": "left", "speed": 1000 },
-        { "direction": "right", "speed": 1000 }
+        { "direction": "left", "speed": 192 },
+        { "direction": "right", "speed": 192 },
+        { "direction": "left", "speed": 192 },
+        { "direction": "right", "speed": 192 },
+        { "direction": "left", "speed": 192 },
+        { "direction": "right", "speed": 192 },
+        { "direction": "left", "speed": 192 },
+        { "direction": "right", "speed": 192 },
+        { "direction": "left", "speed": 192 },
+        { "direction": "right", "speed": 192 },
+        { "direction": "left", "speed": 192 },
+        { "direction": "right", "speed": 192 },
+        { "direction": "left", "speed": 192 },
+        { "direction": "right", "speed": 192 },
+        { "direction": "left", "speed": 192 },
+        { "direction": "right", "speed": 192 },
+        { "direction": "left", "speed": 192 }
       ]
     }
   ]
@@ -351,8 +414,6 @@ class UIScene extends Phaser.Scene {
         this.retryButton.setVisible(false);
         this.messageContainer.add(this.retryButton);
 
-        // 「さいしょにもどる」ボタンの初期化（削除）
-
         // ボタンのイベント設定
         this.stageSelectButton.on('pointerdown', () => {
             this.hideMessages();
@@ -529,7 +590,7 @@ class StageSelectScene extends Phaser.Scene {
 
         const stages = stagesConfig.stages;
         const stagesPerRow = 3;
-        const buttonWidth = 100;
+        const buttonWidth = 120;
         const buttonHeight = 40;
         const padding = 20;
         const totalWidth = stagesPerRow * (buttonWidth + padding) - padding;
