@@ -33,7 +33,7 @@
             canvas.width = window.innerHeight / aspectRatio;
         }
 
-        // UIの位置を再調整
+        // UIの位置を再調整（フレックスボックスに任せるため不要）
         uiManager.updateUIPositions();
     }
 
@@ -90,22 +90,15 @@
         uiManager.createButton('すたーと', () => {
             gameState = 'stageSelect';
             showStageSelect();
-        });
+        }, 'primary');
     }
 
     // ステージ選択画面の表示
     function showStageSelect() {
         uiManager.clearUI();
         uiManager.showMessage('すてーじをせんたくしてください');
-        const buttonWidth = canvas.width * 0.3;
-        const buttonHeight = canvas.height * 0.1;
-        const spacing = canvas.width * 0.05;
-        const totalPerRow = 2;
-        const startX = (canvas.width - (buttonWidth * totalPerRow + spacing * (totalPerRow - 1))) / 2;
-        const startY = canvas.height * 0.4;
 
         for (let i = 1; i <= totalStages; i++) {
-            // フレックスボックスを使用するため、xとyは不要
             uiManager.createButton(`すてーじ ${i}`, () => {
                 currentStage = i;
                 startStage(currentStage);
@@ -439,6 +432,7 @@
             button.addEventListener('click', onClick);
             uiDiv.appendChild(button);
             buttons.push(button);
+            console.log(`Button created: ${text}`); // デバッグ用ログ
         };
 
         this.updateUIPositions = function () {
