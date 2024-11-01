@@ -22,7 +22,7 @@
 
     // 画面サイズの調整（アスペクト比の維持）
     function resizeCanvas() {
-        let aspectRatio = 9 / 16; // 基準となるアスペクト比（縦長）
+        let aspectRatio = 16 / 9; // 基準となるアスペクト比（縦長）
         let windowAspect = window.innerHeight / window.innerWidth;
 
         if (windowAspect > aspectRatio) {
@@ -97,7 +97,7 @@
     function showStageSelect() {
         uiManager.clearUI();
         uiManager.showMessage('すてーじをせんたくしてください');
-        const buttonWidth = canvas.width * 0.25;
+        const buttonWidth = canvas.width * 0.3;
         const buttonHeight = canvas.height * 0.1;
         const spacing = canvas.width * 0.05;
         const totalPerRow = 2;
@@ -120,8 +120,8 @@
         uiManager.clearUI();
 
         // プレイヤーとその他のオブジェクトを初期化
-        player = new Player(canvas.width / 2 - canvas.width * 0.05, canvas.height - canvas.height * 0.15);
-        goal = new Goal(canvas.width / 2 - canvas.width * 0.05, canvas.height * 0.05);
+        player = new Player(canvas.width / 2 - canvas.width * 0.04, canvas.height - canvas.height * 0.15);
+        goal = new Goal(canvas.width / 2 - canvas.width * 0.04, canvas.height * 0.05);
         enemies = [];
         stageManager = new StageManager(stageNumber);
         collisionManager = new CollisionManager();
@@ -170,21 +170,32 @@
     function Player(x, y) {
         this.x = x;
         this.y = y;
-        this.width = canvas.width * 0.1;
-        this.height = canvas.width * 0.1;
-        this.speed = canvas.height * 0.008;
+        this.width = canvas.width * 0.07; // サイズを小さく
+        this.height = canvas.width * 0.07; // サイズを小さく
+        this.speed = canvas.height * 0.005; // 一定速度に設定
         this.image = assetManager.getAsset('santa');
+        this.isMoving = false;
 
         this.update = function () {
-            if (inputManager.isTouched()) {
-                this.y -= this.speed;
-            } else {
-                this.y += this.speed;
+            if (inputManager.isTapped()) {
+                this.isMoving = true;
             }
 
+            if (this.isMoving) {
+                this.y -= this.speed;
+            }
+
+            // ゴールに向かって一定速度で移動
+            // yの位置がゴールに達したら自動的に停止し、ステージクリアが呼び出される
+
             // 画面外に出ないようにする
-            if (this.y < 0) this.y = 0;
-            if (this.y > canvas.height - this.height) this.y = canvas.height - this.height;
+            if (this.y < 0) {
+                this.y = 0;
+                this.isMoving = false;
+            }
+            if (this.y > canvas.height - this.height) {
+                this.y = canvas.height - this.height;
+            }
         };
 
         this.draw = function (ctx) {
@@ -196,8 +207,8 @@
     function Enemy(config) {
         this.x = config.x;
         this.y = config.y;
-        this.width = canvas.width * 0.1;
-        this.height = canvas.width * 0.1;
+        this.width = canvas.width * 0.07; // サイズを小さく
+        this.height = canvas.width * 0.07; // サイズを小さく
         this.speed = config.speed;
         this.direction = config.direction;
         this.movementPattern = config.movementPattern;
@@ -213,15 +224,18 @@
             } else if (this.movementPattern === 'zigzag') {
                 this.x += this.speed * Math.cos(Date.now() / 500);
                 this.y += this.speed * this.direction;
-                if (this.y <= canvas.height * 0.2 || this.y >= canvas.height * 0.8) {
+                if (this.y <= canvas.height * 0.3 || this.y >= canvas.height * 0.7) { // スタート地点近くを避ける
                     this.direction *= -1;
                 }
             }
 
             // 時々スピードアップ
             if (Math.random() < 0.005) {
-                this.speed *= 1.05;
+                this.speed = Math.min(this.speed * 1.05, canvas.width * 0.007); // 上限を設定
             }
+
+            // 下限を設定
+            this.speed = Math.max(this.speed, canvas.width * 0.003);
         };
 
         this.draw = function (ctx) {
@@ -233,8 +247,8 @@
     function Goal(x, y) {
         this.x = x;
         this.y = y;
-        this.width = canvas.width * 0.1;
-        this.height = canvas.width * 0.1;
+        this.width = canvas.width * 0.07; // サイズを小さく
+        this.height = canvas.width * 0.07; // サイズを小さく
         this.image = assetManager.getAsset('goal');
 
         this.update = function () {
@@ -287,7 +301,7 @@
                     enemyConfigs.push({
                         x: 0,
                         y: canvas.height * 0.4,
-                        speed: canvas.width * 0.003,
+                        speed: canvas.height * 0.003, // スピード基準を高さに基づく
                         direction: 1,
                         movementPattern: 'horizontal'
                     });
@@ -296,15 +310,15 @@
                     // ステージ2：敵2体、速度やや速い、ジグザグ移動
                     enemyConfigs.push({
                         x: canvas.width * 0.3,
-                        y: canvas.height * 0.2,
-                        speed: canvas.width * 0.004,
+                        y: canvas.height * 0.3,
+                        speed: canvas.height * 0.004,
                         direction: 1,
                         movementPattern: 'zigzag'
                     });
                     enemyConfigs.push({
                         x: canvas.width * 0.5,
                         y: canvas.height * 0.5,
-                        speed: canvas.width * 0.004,
+                        speed: canvas.height * 0.004,
                         direction: -1,
                         movementPattern: 'zigzag'
                     });
@@ -314,21 +328,21 @@
                     enemyConfigs.push({
                         x: 0,
                         y: canvas.height * 0.25,
-                        speed: canvas.width * 0.005,
+                        speed: canvas.height * 0.005,
                         direction: 1,
                         movementPattern: 'horizontal'
                     });
                     enemyConfigs.push({
                         x: canvas.width * 0.5,
                         y: canvas.height * 0.4,
-                        speed: canvas.width * 0.005,
+                        speed: canvas.height * 0.005,
                         direction: -1,
                         movementPattern: 'zigzag'
                     });
                     enemyConfigs.push({
                         x: 0,
                         y: canvas.height * 0.55,
-                        speed: canvas.width * 0.005,
+                        speed: canvas.height * 0.005,
                         direction: 1,
                         movementPattern: 'horizontal'
                     });
@@ -337,29 +351,29 @@
                     // ステージ4：敵4体、速度速い、動きに変化
                     enemyConfigs.push({
                         x: canvas.width * 0.1,
-                        y: canvas.height * 0.2,
-                        speed: canvas.width * 0.006,
+                        y: canvas.height * 0.3,
+                        speed: canvas.height * 0.006,
                         direction: 1,
                         movementPattern: 'zigzag'
                     });
                     enemyConfigs.push({
                         x: canvas.width * 0.6,
                         y: canvas.height * 0.35,
-                        speed: canvas.width * 0.006,
+                        speed: canvas.height * 0.006,
                         direction: -1,
                         movementPattern: 'horizontal'
                     });
                     enemyConfigs.push({
                         x: canvas.width * 0.2,
                         y: canvas.height * 0.5,
-                        speed: canvas.width * 0.006,
+                        speed: canvas.height * 0.006,
                         direction: 1,
                         movementPattern: 'zigzag'
                     });
                     enemyConfigs.push({
                         x: canvas.width * 0.7,
                         y: canvas.height * 0.65,
-                        speed: canvas.width * 0.006,
+                        speed: canvas.height * 0.006,
                         direction: -1,
                         movementPattern: 'horizontal'
                     });
@@ -369,35 +383,35 @@
                     enemyConfigs.push({
                         x: 0,
                         y: canvas.height * 0.15,
-                        speed: canvas.width * 0.007,
+                        speed: canvas.height * 0.007,
                         direction: 1,
                         movementPattern: 'zigzag'
                     });
                     enemyConfigs.push({
                         x: canvas.width * 0.5,
                         y: canvas.height * 0.3,
-                        speed: canvas.width * 0.007,
+                        speed: canvas.height * 0.007,
                         direction: -1,
                         movementPattern: 'horizontal'
                     });
                     enemyConfigs.push({
                         x: canvas.width * 0.2,
                         y: canvas.height * 0.45,
-                        speed: canvas.width * 0.007,
+                        speed: canvas.height * 0.007,
                         direction: 1,
                         movementPattern: 'zigzag'
                     });
                     enemyConfigs.push({
                         x: canvas.width * 0.6,
                         y: canvas.height * 0.6,
-                        speed: canvas.width * 0.007,
+                        speed: canvas.height * 0.007,
                         direction: -1,
                         movementPattern: 'horizontal'
                     });
                     enemyConfigs.push({
                         x: canvas.width * 0.1,
                         y: canvas.height * 0.75,
-                        speed: canvas.width * 0.007,
+                        speed: canvas.height * 0.007,
                         direction: 1,
                         movementPattern: 'zigzag'
                     });
@@ -411,30 +425,38 @@
 
     // 入力モジュール
     function InputManager() {
-        let touched = false;
+        let tapped = false;
 
         canvas.addEventListener('mousedown', function (e) {
             e.preventDefault();
-            touched = true;
+            tapped = true;
         });
 
         canvas.addEventListener('mouseup', function (e) {
             e.preventDefault();
-            touched = false;
+            // tapped remains true to indicate a tap was made
         });
 
         canvas.addEventListener('touchstart', function (e) {
             e.preventDefault();
-            touched = true;
+            tapped = true;
         });
 
         canvas.addEventListener('touchend', function (e) {
             e.preventDefault();
-            touched = false;
+            // tapped remains true to indicate a tap was made
         });
 
+        this.isTapped = function () {
+            if (tapped) {
+                tapped = false;
+                return true;
+            }
+            return false;
+        };
+
         this.isTouched = function () {
-            return touched;
+            return false; // Not used in current implementation
         };
     }
 
