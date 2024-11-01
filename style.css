@@ -34,7 +34,7 @@ h1 {
     color: #fff;
     text-align: center;
     font-size: 8vw;
-    margin-top: 5vh;
+    margin-bottom: 5vh;
     font-family: 'Arial', sans-serif;
     text-shadow: 2px 2px 4px #000;
 }
@@ -42,7 +42,7 @@ h1 {
 /* メッセージのスタイル */
 #message {
     position: absolute;
-    top: 35%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #fff;
@@ -54,7 +54,6 @@ h1 {
 
 /* ボタンのスタイル */
 .button {
-    position: relative; /* UIコンテナ内での相対位置 */
     margin: 1vw 0; /* ボタン間の間隔 */
     padding: 1vw 2vw;
     background-color: rgba(255, 255, 255, 0.9);
@@ -66,6 +65,7 @@ h1 {
     transition: transform 0.2s, background-color 0.2s;
     color: #333;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    pointer-events: all; /* ボタン自体はクリックイベントを受け付ける */
 }
 
 .button:hover {
@@ -73,13 +73,13 @@ h1 {
     background-color: rgba(255, 255, 255, 1);
 }
 
-/* ゲームオーバーやステージクリア時のボタンスタイル */
-#ui .button-secondary {
+/* セカンダリボタンのスタイル（ゲームオーバーやステージクリア時） */
+.button-secondary {
     background-color: rgba(200, 200, 200, 0.9);
     color: #222;
 }
 
-#ui .button-secondary:hover {
+.button-secondary:hover {
     background-color: rgba(200, 200, 200, 1);
 }
 
