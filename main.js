@@ -480,12 +480,20 @@
                 const img = new Image();
                 img.src = src;
                 img.onload = assetLoaded;
+                img.onerror = function () {
+                    console.error(`Failed to load image: ${src}`);
+                    assetLoaded();
+                };
                 assets[name] = img;
             }
 
             function loadAudio(name, src) {
                 const audio = new Audio(src);
                 audio.addEventListener('canplaythrough', assetLoaded, false);
+                audio.onerror = function () {
+                    console.error(`Failed to load audio: ${src}`);
+                    assetLoaded();
+                };
                 assets[name] = audio;
             }
 
